@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% block stylesheet %}{% endblock stylesheet %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+{% block bodyStyle %}
+<body>
+{% endblock bodyStyle %}
+
+{% block TEST %}{% endblock TEST %}
+
+
+<header>
+    <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+
+
+
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <div></div>
+                    <ul class="list-unstyled">
+                        {% block navMenu %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark {% block navBarBg %}bg-dark{% endblock navBarBg %} box-shadow">
+        <div class="container d-flex justify-content-between">
+            <h2  >{% block brand %}<a class="text-white" href="home">Whole Wild World</a>{% endblock brand %}</h2>
+            {% block profilCount %}
+
+
+            {% endblock %}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="list-unstyled">{% block avatar %}{% endblock avatar %}
+                    {% block bookmark %}{% endblock bookmark %}
+
+
+                </span>
+
+            </button>
+            <h4 class="text-white"><a  class="text-white" href="{% block signUpLink %}{% endblock %}">{% block signUp %}{% endblock %}</a></h4>
+            <a href="{% block connexionLink %}{% endblock %}" class="navbar-brand d-flex align-items-center list-unstyled">
+                {% block connexion %} {% endblock %}
+
+
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+</header>
+
+
+
+{% block main %}{% endblock %}
+{#{% block footer %}
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted"></span>
+        </div>
+    </footer>
+{% endblock footer %}#}
+
+
+
+
+
+
+
+{% block script %}
+<script src="public/dist/js/jQuery.js"></script>
+
+<script src="public/dist/js/bootstrap.min.js"></script>
+
+
+{% endblock script %}
+
+</body>
+</html>

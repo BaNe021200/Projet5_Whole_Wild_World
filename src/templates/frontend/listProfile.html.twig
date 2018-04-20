@@ -1,0 +1,149 @@
+{% extends "homeUser.html.twig" %}
+{% import 'form.html.twig' as form %}
+{% block stylesheet %}
+{{ parent() }}
+    <link rel="stylesheet" href="public/css/galerie3.css">
+    <link rel="stylesheet" href="public/css/tuto.cs">
+
+
+{% endblock %}
+
+{% block TEST %}
+
+
+
+
+{% endblock TEST %}
+
+
+
+
+
+{% block main %}
+    <h1 class="marginLeft">profile des utilisateurs</h1>
+
+
+
+   
+
+    <div class="container marketing">
+
+
+        {#{{ form.rowVerticalSpace() }}#}
+        <div class="row">
+
+            {% for userDatum in userdata %}
+
+
+
+                <!-- <div class="row"></div>-->
+
+
+
+                <div class="col-md-4">
+                    <img
+                    {% if userDatum.connected==1 %}
+                    class="rounded-circle connected "
+
+                     {% else %}
+
+                       class="rounded-circle"
+                    {% endif %}
+                         src="users/img/user/{{ userDatum.username }}/profilPicture/{{ userDatum.filename }}.jpg"
+                         width="300" height="300">
+
+                    <h2 class="text-center">{{ userDatum.username }}</h2>
+                    <p>{{ userDatum.user_age }} ans
+
+                        {% if userDatum.city==true %}
+                            , {{ userDatum.city }}
+
+                        {% endif %}
+                    </p>
+                    <p>
+                        <a class="btn btn-secondary" href="homeUserFront&amp;userId={{ userDatum.user_id }}" role="button">Voir le profil de {{ userDatum.username }}</a>
+                        <br/></p>
+                </div>
+
+            {% endfor %}
+            <div class="col-md 12 text-center">
+
+
+
+                     </div>
+
+        </div>
+
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled"> <a class="page-link" href="{{ i }}" tabindex="-1">Previous</a> </li>
+        {% for i in 1..infos.nbPage %}
+
+            {% if i == currentPage %}
+
+                {{ i }}
+
+
+            {% elseif i == currentPage + 1 %}
+
+
+                <li class="page-item  "><a href="listProfils.php?p={{ i }}" class="page-link" >{{ i }}</a> <span class="sr-only">{{ i }}</span>
+                </li>
+
+
+
+            {% else %}
+
+                <li class="page-item   "><a href="listProfils.php?p={{ i }}" class="page-link ">{{ i }}</a></li>
+
+
+            {% endif %}
+
+        {% endfor %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="{{ i  }}">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+
+      {#  <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+
+
+
+                <a class="page-link" href="#">1</a>
+                <a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>#}
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+{% endblock main %}
+{% block script %}
+    {{ parent() }}
+    <script src="public/js/galerie1.js"></script>
+
+
+
+{% endblock %}

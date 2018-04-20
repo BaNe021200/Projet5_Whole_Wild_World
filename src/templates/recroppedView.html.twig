@@ -1,0 +1,85 @@
+{% extends "homeUser.html.twig" %}
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="public/css/recroppedView.css">
+{% endblock %}
+
+{% block TEST  %}
+
+
+
+
+{% endblock TEST %}
+
+
+
+
+
+{% block main %}
+
+    <!--modale recropView-->
+    <div class="modal fade" id="recropView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Recentrage de votre photo</h5>
+                    <button type="button" id=" dismissModalCross" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container">
+                        <div id="recrop-modal" class="row ">
+
+
+                            <div class="card_md-4_box-shadow ">
+
+
+                                <img src="{{ recrop.img2crop }}" width="150" height="150">
+                                <p class="text-center">avant</p>
+                                <a href="CroppedChoice&amp;id={{ recrop.recrop.id }}" ><button class="btn btn-outline-dark text-center" id="validateBtn" type="submit">Valider</button></a>
+
+                            </div>
+
+                            <div class="card_md-4_box-shadow ">
+                                <img src="{{ recrop.recrop.dirname }}/{{ recrop.recrop.filename }}.{{ recrop.recrop.extension }}"
+                                 width="150"
+                                 height="150">
+                            <p class="text-center">après</p>
+                                <a href="homeUser" ><button class="btn btn-outline-dark text-center" id="validateBtn" type="submit">Valider</button></a>
+
+                            </div>
+
+                        </div>
+                </div></div>
+
+
+                <div class="modal-footer">
+
+                    <p>Cliquez sur valider si l'image vous satisfait.Sinon, cliquez sur annuler</p>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin modale recropView-->
+
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+
+    <script>  $('#recropView').modal('show');</script>
+
+    <script> document.getElementById('dismissModal').addEventListener('click',function () {
+            window.location.href="galerie1"
+        });
+    </script>
+
+    <script src="public/js/homeUser.js"></script>
+
+{% endblock script %}
+

@@ -1,0 +1,328 @@
+
+{% macro input(name,label, placeholder, options=[]) %}
+<div class="row">
+    <div class="col-md-3 field-label-responsive">
+        <label for="{{ name }}">{{ label }}</label>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-{{options.class}}"></i></div>
+                <input type="{{ options.type ?: 'text' }}" name="{{ name }}" class="form-control" id="{{ name }}"
+                       placeholder="{{ placeholder }}"  autofocus value="{{ options.value ?: '' }}"required >
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put name validation error messages here -->
+                        </span>
+        </div>
+    </div>
+</div>
+
+{% endmacro %}
+
+{% macro inputSimple(name,label, placeholder, options=[]) %}
+
+    <p><label for="{{ name }}"><i class="fa fa-{{options.class}}"></i> {{ label }}</label>
+
+
+
+
+        <input type="{{ options.type ?: 'text' }}" class="form-control" name="{{ name }}" id="{{ name }}" placeholder="{{ placeholder }}"  autofocus>
+
+
+
+    </p>
+
+
+
+
+{% endmacro %}
+
+{% macro upload(uploadId, name,label) %}
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <form action="upload&amp;id={{ uploadId }}" id="uploadFormHidden{{ uploadId }}" name="uploadFormHidden{{uploadId}}" method="post" class="form-horizontal hidden" enctype="multipart/form-data">
+                    <fieldset class="form-control uploadForm">Vos Photos
+                        <input type="hidden" class="form-control" value="{{userDatum.username}}" name="username" >
+
+
+                        <p><label for="{{ name }}"><i class="fa fa-image"></i> {{ label }}</label>
+
+
+
+
+                            <input type="file" class="form-control" name="{{ name }}" id="{{ name }}"  required autofocus>
+
+
+
+                        </p>
+
+
+
+
+
+
+                    </fieldset>
+                    <button type="submit" id="submitButton" class="btn btn-outline-primary btn-sm"  >envoyer</button>
+                    <button type="reset" class="btn btn-outline-danger btn-sm" >tout effacer</button>
+
+                </form>
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+   </div>
+{% endmacro %}
+
+{#{% macro upload(uploadId, name,label) %}
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <form action="upload{{ uploadId }}" id="uploadFormHidden{{uploadId}}" name="uploadFormHidden{{uploadId}}" method="post" class="form-horizontal hidden" enctype="multipart/form-data">
+                    <fieldset class="form-control">
+                        <input type="hidden" class="form-control" value="{{userDatum.username}}" name="username" >
+
+
+                        <p><label for="{{ name }}"><i class="fa fa-image"></i> {{ label }}</label>
+
+
+
+
+                            <input type="file" class="form-control" name="{{ name }}" id="{{ name }}"  required autofocus>
+
+
+
+                        </p>
+
+
+
+
+
+
+                    </fieldset>
+                    <button type="submit" id="submitButton" class="btn btn-outline-primary btn-sm"  >envoyer</button>
+                    <button type="reset" class="btn btn-outline-danger btn-sm" >tout effacer</button>
+
+                </form>
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+{% endmacro %}#}
+
+{% macro modalDelete(uploadId) %}
+
+
+    <div class="modal fade" id="myModal{{ uploadId }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Danger suppression !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Vous êtes sur point de supprimer votre photo...continuer ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                    <a href="deleteImage&amp;id={{ uploadId }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endmacro %}
+
+{% macro radioInline(idFor,name,label,value) %}
+    &nbsp;
+
+    <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="{{ idFor }}" name="{{ name }}" class="custom-control-input" value="{{ value }}"  required
+
+    >
+    <label class="custom-control-label" for="{{ idFor }}"> {{ label }}</label>
+</div>
+{% endmacro %}
+
+
+
+
+
+{% macro rowVerticalSpace() %}
+    <div class="row">
+        <div class="col-md-12 text-center hiddenColor">&nbsp;</div>
+    </div>
+{% endmacro %}
+{% macro col12(contenu) %}
+    <div class="row">
+        <div class="col-md-12 text-center">{{ contenu }}</div>
+    </div>
+{% endmacro %}
+
+{% macro col363(contenu) %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center">{{ contenu }}</div>
+        <div class="col-md-3"></div>
+    </div>
+{% endmacro %}
+
+{% macro colcentertextarea(colNum13,colNum2,name,placeholder,cols,rows,options=[]) %}
+    <div class="row">
+        <div class="col-md-{{ colNum13 }}"></div>
+
+        <textarea class="col-md-{{ colNum2 }} form-control" name="{{ name }}" id="{{ name }}" cols="{{ cols }}" rows="{{ rows }}" placeholder="{{ placeholder }}">{{ options.value(session) ?session :  infos.0 }}</textarea>
+
+        <div class="col-md-{{ colNum13 }}"></div>
+    </div>
+{% endmacro %}
+
+
+{% macro col12radioInline9(text,idFor,name,label,value,idFor1,name1,label1,value1,idFor2,name2,label2,value2,idFor3,name3,label3,value3,idFor4,name4,label4,value4,idFor5,name5,label5,value5,idFor6,name6,label6,value6,idFor7,name7,label7,value7,idFor8,name8,label8,value8) %}
+    {% import _self as forms %}
+
+    <div class="row">
+
+        <div class="col-md-12 text-center">{{ text }}
+
+            {{ forms.radioInline(idFor,name,label,value) }}
+            {{ forms.radioInline(idFor1,name1,label1,value1) }}
+            {{ forms.radioInline(idFor2,name2,label2,value2) }}
+            {{ forms.radioInline(idFor3,name3,label3,value3) }}
+            {{ forms.radioInline(idFor4,name4,label4,value4) }}
+            {{ forms.radioInline(idFor5,name5,label5,value5) }}
+            {{ forms.radioInline(idFor6,name6,label6,value6) }}
+            {{ forms.radioInline(idFor7,name7,label7,value7) }}
+            {{ forms.radioInline(idFor8,name8,label8,value8) }}
+
+
+           </div>
+
+    </div>
+{% endmacro %}
+
+{% macro col12radioInline8(text,idFor,name,label,value,idFor1,name1,label1,value1,idFor2,name2,label2,value2,idFor3,name3,label3,value3,idFor4,name4,label4,value4,idFor5,name5,label5,value5,idFor6,name6,label6,value6,idFor7,name7,label7,value7) %}
+    {% import _self as forms %}
+
+    <div class="row">
+
+        <div class="col-md-12 text-center">{{ text }}
+
+            {{ forms.radioInline(idFor,name,label,value) }}
+            {{ forms.radioInline(idFor1,name1,label1,value1) }}
+            {{ forms.radioInline(idFor2,name2,label2,value2) }}
+            {{ forms.radioInline(idFor3,name3,label3,value3) }}
+            {{ forms.radioInline(idFor4,name4,label4,value4) }}
+            {{ forms.radioInline(idFor5,name5,label5,value5) }}
+            {{ forms.radioInline(idFor6,name6,label6,value6) }}
+            {{ forms.radioInline(idFor7,name7,label7,value7) }}
+
+
+           </div>
+
+    </div>
+{% endmacro %}
+
+{% macro col12radioInline5(text,idFor,name,label,value,idFor1,name1,label1,value1,idFor2,name2,label2,value2,idFor3,name3,label3,value3,idFor4,name4,label4,value4) %}
+    {% import _self as forms %}
+
+    <div class="row">
+
+        <div class="col-md-12 text-center">{{ text }}
+
+            {{ forms.radioInline(idFor,name,label,value) }}
+            {{ forms.radioInline(idFor1,name1,label1,value1) }}
+            {{ forms.radioInline(idFor2,name2,label2,value2) }}
+            {{ forms.radioInline(idFor3,name3,label3,value3) }}
+            {{ forms.radioInline(idFor4,name4,label4,value4) }}
+
+
+
+           </div>
+
+    </div>
+{% endmacro %}
+
+{% macro col12radioInline4(text,idFor,name,label,value,idFor1,name1,label1,value1,idFor2,name2,label2,value2,idFor3,name3,label3,value3) %}
+    {% import _self as forms %}
+
+    <div class="row">
+
+        <div class="col-md-12 text-center">{{ text }}
+
+            {{ forms.radioInline(idFor,name,label,value) }}
+            {{ forms.radioInline(idFor1,name1,label1,value1) }}
+            {{ forms.radioInline(idFor2,name2,label2,value2) }}
+            {{ forms.radioInline(idFor3,name3,label3,value3) }}
+
+
+
+
+           </div>
+
+    </div>
+{% endmacro %}
+
+{% macro col12radioInline3(text,idFor,name,label,value,idFor1,name1,label1,value1,idFor2,name2,label2,value2) %}
+    {% import _self as forms %}
+
+    <div class="row">
+
+        <div class="col-md-12 text-center">{{ text }}
+
+            {{ forms.radioInline(idFor,name,label,value) }}
+            {{ forms.radioInline(idFor1,name1,label1,value1) }}
+            {{ forms.radioInline(idFor2,name2,label2,value2) }}
+
+
+
+
+           </div>
+
+    </div>
+{% endmacro %}
+
+{% macro col12radioInline2(text,idFor,name,label,value,idFor1,name1,label1,value1) %}
+    {% import _self as forms %}
+
+    <div class="row">
+
+        <div class="col-md-12 text-center">{{ text }}
+
+            {{ forms.radioInline(idFor,name,label,value) }}
+            {{ forms.radioInline(idFor1,name1,label1,value1) }}
+
+
+
+
+
+           </div>
+
+    </div>
+{% endmacro %}
+
+
+
+
+

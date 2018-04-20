@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+section .half {
+    box-sizing: border-box;
+    width: 50%;
+    padding: 0 15px;
+    float: left;
+}
+section input {
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 17px;
+    display: block;
+}
+#input,input2 {
+    padding-top: 10px;
+}
+#output {
+    clear: both;
+    padding: 5px 15px;
+}
+#output a {
+    display: block;
+    text-decoration: none;
+    color: #4565ac;
+    padding: 2px;
+}
+#output a:hover {
+    background: #c5e5fc;
+}

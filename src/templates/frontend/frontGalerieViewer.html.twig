@@ -1,0 +1,74 @@
+{% extends "galerie3.html.twig" %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="public/css/galerieViewer.css">
+
+{% endblock %}
+
+{% block TEST %}
+
+{% endblock TEST %}
+
+
+
+
+
+
+
+
+
+{% block main %}
+
+    <!--Modale viewer simple-->
+    <div class="modal fade" id="modalViewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel"></h5>
+
+                </div>
+                <div class="modal-body" id="modalSlide" >
+
+
+
+                    <img class="card-img-top" id="modalViewerStyle" src=" {{ view.dirname }}/{{ view.filename }}.{{ view.extension }} "   alt="Card image cap">
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" id="dismissModal"  class="btn btn-outline-secondary text-center" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fin Modale viewer simple-->
+
+
+{% endblock main %}
+
+
+{% block script %}
+    {{ parent() }}
+
+    <script>  $('#modalViewer').modal('show');</script>
+
+    <script> document.getElementById('dismissModal').addEventListener('click',function () {
+            window.location.href="userGalerie&userId={{ view.getUserId }}&username={{ username }}"
+        });
+    </script>
+
+
+    <script src="public/js/homeUser.js"></script>
+
+
+    <script src="public/js/SlideShow/SlideShow.js"></script>
+    <script src="public/js/SlideShow/viewSlideshow.js"></script>
+    <script src="public/js/SlideShow/mainSlideShow.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+
+
+{% endblock script %}
+

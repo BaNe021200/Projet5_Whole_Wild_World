@@ -1,0 +1,98 @@
+{% extends "layout.html.twig" %}
+
+{% import 'form.html.twig' as form %}
+{% block stylesheet %}
+    {{parent()}}
+    <link rel="stylesheet" href="public/css/tuto.cs">
+    <link rel="stylesheet" href="public/css/home.css">
+    <link rel="stylesheet" href="public/css/carousel.css">
+    <link rel="stylesheet" href="public/css/homeUser.cs">
+{% endblock %}
+
+{% block title %} Whole While World {% endblock title %}
+
+    {% block signUp%}s'inscrire{% endblock %}
+    {% block signUpLink%}signUp{% endblock %}
+    {% block connexion %}connexion{% endblock %}
+    {% block connexionLink %}connexion{% endblock %}
+
+
+{% block TEST %}
+
+  
+
+{% endblock TEST %}
+
+
+
+
+
+
+{% block main %}
+
+
+
+
+
+
+    <div class="container">
+
+
+        {#{{ form.rowVerticalSpace() }}#}
+        <div class="row">
+
+            {% for userDatum in userdata %}
+
+
+
+
+                <!-- <div class="row"></div>-->
+
+
+
+                <div class="col-md-4">
+                    <img class="rounded-circle "
+                         src="users/img/user/{{ userDatum.username }}/profilPicture/{{ userDatum.filename }}.jpg"
+                         width="300" height="300">
+                    <h2 class="text-center">{{ userDatum.username }}</h2>
+                    <p>{{ userDatum.user_age }} ans
+
+                        {% if userDatum.city==true %}
+                            , {{ userDatum.city }}
+
+                        {% endif %}</p>
+                    <p>
+                        <a class="btn btn-secondary" href="signUp" role="button">Voir le profil de {{ userDatum.username }}</a>
+                        <br/></p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock main %}
+
+{% block script %}
+       {{ parent() }}
+    <script src="public/dist/js/bootstrap.min.js"></script>
+
+
+
+{% endblock script %}

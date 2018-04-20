@@ -1,0 +1,39 @@
+html,body{
+    font-size: 62.5%;
+
+}
+
+h1{font-size: 4rem;}
+h2{font-size: 3.5rem;}
+h3{font-size: 3rem;}
+h4{font-size: 2.5rem;}
+h5{font-size: 2rem;}
+
+
+
+
+.presentation,.deconnexionButton
+{
+    font-size: 2rem;
+}
+
+.txt, .profilButton{
+    font-size: 1.6rem;
+}
+
+#btn1{
+    margin: auto;
+}
+
+.presentation{
+    margin-left:5px;
+}
+
+.hiddenColor{
+
+    border-color: transparent ;
+}
+
+.alert, .hash{
+    font-size: 3rem;
+}

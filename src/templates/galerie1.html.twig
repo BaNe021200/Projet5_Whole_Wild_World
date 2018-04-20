@@ -1,0 +1,198 @@
+{% extends "homeUser.html.twig" %}
+{% import 'form.html.twig' as form %}
+{% block stylesheet %}
+
+
+    <link rel="stylesheet" href="public/css/album.css">
+    <link rel="stylesheet" href="public/css/users.css">
+    <link rel="stylesheet" href="public/css/galerie1.css">
+
+
+{% endblock stylesheet %}
+
+{% block title %}{% endblock %}
+
+
+    {% block signUpLink %}homeUser {% endblock signUpLink %}
+
+
+
+{% block connexion %}déconnexion{% endblock %}
+    {% block connexionLink %}deconnexion{% endblock %}
+
+{% block main %}
+    <h1>Hello {{ userDatum.first_name }}  </h1>
+
+
+
+
+    <main role="main">
+
+
+
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                           <img class="card-img-top img-thumbnail" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=cliquez sur upload pour télécharger  de profil" id="1" src="users/img/user/{{ userDatum.username }}/thumbnails/img_001-thumb.jpg" alt="Photo N°1">
+
+                            <div class="card-body">
+                                <p class="card-text">{#This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.#}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" id="uploadButton1"  title="ouvrir formulaire" class="btn btn-sm btn-outline-secondary" >upload</button>
+                                    <button type="button" id="hideButton1" title="fermer formulaire" class="btn btn-sm btn-outline-secondary" ><i class="fas fa-caret-up"></i>   </button>
+                                 <button  type="button" data-toggle="modal" href="#myModal1"title="supprimer photo" class="btn btn-sm btn-outline-secondary" >delete</button>
+
+                                    <a href="recropped&amp;id={{ 1 }}">
+                                        <button type="submit"  name="recropped"  class="btn btn-outline-secondary btn-sm">recadrer</button></a>
+
+                                </div>
+
+
+                                <small class="text-muted">Image de Profil</small>
+
+                            </div>
+                                {{ form.upload('1','pic1', 'photo N°1') }}
+                            </div>
+                        </div>
+                    </div>
+
+    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top img-thumbnail" id="2" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=cliquez sur upload pour télécharger votre photo N°2" src="users/img/user/{{ userDatum.username }}/thumbnails/img_002-thumb.jpg" alt="Photo N°2">
+                            <div class="card-body">
+                                <p class="card-text">{#This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.#}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" id="uploadButton2" title="ouvrir formulaire"  class="btn btn-sm btn-outline-secondary" >upload</button>
+                                        <button type="button" title="fermer formulaire" class="btn btn-sm btn-outline-secondary" id="hideButton2"> <i class="fas fa-caret-up"></i>  </button>
+                                        <button type="button" data-toggle="modal" href="#myModal2" title="supprimer photo" class="btn btn-sm btn-outline-secondary">delete</button>
+
+                                    </div>
+
+                                    <small class="text-muted"></small>
+                                </div>
+                                {{ form.upload('2','pic2', 'photo N°2') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top img-thumbnail" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=cliquez sur upload pour télécharger votre photo N°3" src="users/img/user/{{ userDatum.username }}/thumbnails/img_003-thumb.jpg" alt="Photo N°3">
+                            <div class="card-body">
+                                <p class="card-text">{#This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.#}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" id="uploadButton3" title="ouvrir formulaire" class="btn btn-sm btn-outline-secondary" >upload</button>
+                                        <button type="button" title="fermer formulaire" class="btn btn-sm btn-outline-secondary" id="hideButton3"> <i class="fas fa-caret-up"></i>  </button>
+                                        <button type="button" data-toggle="modal" href="#myModal3" title="supprimer photo" class="btn btn-sm btn-outline-secondary">delete</button>
+
+                                    </div>
+                                    <small class="text-muted"></small>
+                                </div>
+                                {{ form.upload('3','pic3', 'photo N°3') }}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top img-thumbnail" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=cliquez sur upload pour télécharger votre photo N°4" src="users/img/user/{{ userDatum.username }}/thumbnails/img_004-thumb.jpg" alt="Photo N°4">
+                            <div class="card-body">
+                                <p class="card-text">{#This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.#}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button"  id="uploadButton4" title="ouvrir formulaire" class="btn btn-sm btn-outline-secondary" >upload</button>
+                                        <button type="button" title="fermer formulaire" class="btn btn-sm btn-outline-secondary" id="hideButton4"> <i class="fas fa-caret-up"></i>  </button>
+                                        <button type="button" data-toggle="modal" href="#myModal4" title="supprimer photo" class="btn btn-sm btn-outline-secondary">delete</button>
+
+                                    </div>
+                                    <small class="text-muted"></small>
+                                </div>
+                                {{ form.upload('4','pic4', 'photo N°4') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top img-thumbnail" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=cliquez sur upload pour télécharger votre photo N°5" src="users/img/user/{{ userDatum.username }}/thumbnails/img_005-thumb.jpg" alt="Photo N°5">
+                            <div class="card-body">
+                                <p class="card-text">{#This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.#}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" id="uploadButton5" title="ouvrir formulaire" class="btn btn-sm btn-outline-secondary" >upload</button>
+                                        <button type="button" title="fermer formulaire" class="btn btn-sm btn-outline-secondary" id="hideButton5"> <i class="fas fa-caret-up"></i>  </button>
+                                        <button type="button" data-toggle="modal" href="#myModal5" title="supprimer photo" class="btn btn-sm btn-outline-secondary">delete</button>
+
+                                    </div>
+                                    <small class="text-muted"></small>
+                                </div>
+                                {{ form.upload('5','pic5', 'photo N°5') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top img-thumbnail" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=cliquez sur upload pour télécharger votre photo N°6" src="users/img/user/{{ userDatum.username }}/thumbnails/img_006-thumb.jpg" alt="Photo N°6">
+                            <div class="card-body">
+                                <p class="card-text">{#This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.#}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" id="uploadButton6" title="ouvrir formulaire" class="btn btn-sm btn-outline-secondary" >upload</button>
+                                        <button type="button" title="fermer formulaire" class="btn btn-sm btn-outline-secondary" id="hideButton6"> <i class="fas fa-caret-up"></i>  </button>
+                                        <button type="button" data-toggle="modal" href="#myModal6" title="supprimer photo" class="btn btn-sm btn-outline-secondary">delete</button>
+
+                                    </div>
+                                    <small class="text-muted"></small>
+                                </div>
+                                {{ form.upload('6','pic6', 'photo N°6') }}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+           <!--Modal Delete-->
+            {{ form.modalDelete('1') }}
+            {{ form.modalDelete('2') }}
+            {{ form.modalDelete('3') }}
+            {{ form.modalDelete('4') }}
+            {{ form.modalDelete('5') }}
+            {{ form.modalDelete('6') }}
+
+
+           <!--Fin modal Delete-->
+
+
+
+
+
+
+    </main>
+
+
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+    <script src="public/js/galerie1.js"></script>
+    <script src="public/js/upload.js"></script>
+    <script src="public/js/uploadStatement.js"></script>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,405 @@
+{% extends "homeUser.html.twig" %}
+{% import 'form.html.twig' as form %}
+
+{% block stylesheet %}
+   {{ parent() }}
+
+    <link rel="stylesheet" href="public/css/mails.css">
+    <link rel="stylesheet" href="public/css/messages.css">
+
+
+{% endblock stylesheet %}
+{% block TEST %}
+
+
+
+
+
+
+
+
+
+
+{% endblock TEST %}
+
+
+
+{% block main %}
+
+    {{ form.rowVerticalSpace() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+
+                <h1>Messagerie Privée</h1>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-info active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Boîte de réception &nbsp;  <span class="badge badge-light"> {{ unreadMessages.0 }}
+
+                </span>
+                        <span class="sr-only">sent messages</span></a>
+                    <a class="list-group-item list-group-item-secondary" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Messages envoyés &nbsp;   <span class="badge badge-light">
+
+                    {{countSentMessages.0}}
+
+
+
+                </span>
+                        <span class="sr-only">archived messages</span></a>
+                    <a class="list-group-item list-group-item-success" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages archivés&nbsp;  <span class="badge badge-light"> {{ countArchiveMessages.0 }}
+
+                </span>
+                        <span class="sr-only">read messages</span></a>
+                    <a class="list-group-item list-group-item-danger" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Messages lus&nbsp;  <span class="badge badge-light"> {{ countReadMessages.0 }}
+
+                </span>
+                        <span class="sr-only">read messages</span></a>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+
+                        <!--boîte de réception-->
+
+                        <table class="table table-hover">
+                           <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Expéditeur</th>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Message</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                                {% for unSeenMessage in unSeenMessages %}
+                                    <tr>
+                                        <td scope="row"><img src="{{ unSeenMessage.dirname }}/{{ unSeenMessage.filename }}.{{ unSeenMessage.extension }}" class="mailAvatar" width="50" height="50"></td>
+                                        <td><a href="homeUserFront&amp;userId={{ unSeenMessage.id }}">{{ unSeenMessage.username }}</a></td>
+                                        <td ><a title="lire le message de {{ unSeenMessage.username }}" href="readMessage&amp;messageId={{unSeenMessage.mp_id }}"  >{{ unSeenMessage.title }}</a></td>
+                                        <td>{{ unSeenMessage.message |truncate}}</td>
+                                        <td>{{ unSeenMessage.time_date_fr }}</td>
+                                        <td><a class="linkColorArchived" href="archiveMessages&amp;messageId={{ unSeenMessage.mp_id }}"><i title="archiver le message" class="fas fa-archive"></i></a></td>
+                                        <td>
+                                            <div style="color: red"><i data-toggle="modal" data-target="#myModalDeleteUnreadMessage&amp;messageId={{ unSeenMessage.mp_id }}" data-whatever="{{ unSeenMessage.username }}" class="fas fa-times" title="effacer le message"></i></div></td>
+
+
+
+                                     </tr>
+
+                                    <div class="modal fade" id="myModalDeleteUnreadMessage&amp;messageId={{ unSeenMessage.mp_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Danger suppression !</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Vous êtes sur point de supprimer le message {{ unSeenMessage.title }} de {{ unSeenMessage.username }}...continuer ?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button"  class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                                    <a href="deleteMessage&amp;messageId={{ unSeenMessage.mp_id }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--fin modal delete-->
+
+
+
+
+
+
+
+
+                                {% endfor %}
+
+
+
+
+                            </tbody>
+                        </table>
+                           <!--fin de la boîte de réception-->
+
+
+
+
+                        </div>
+                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+
+
+
+
+                        <!--début messages envoyés-->
+
+                        <table class="table table-hover">
+                             <thead>
+                             <tr>
+                                 <th scope="col"></th>
+                                 <th scope="col">Destinataire</th>
+                                 <th scope="col">Titre</th>
+                                 <th scope="col">Messages</th>
+                                 <th scope="col">date</th>
+                             </tr>
+                             </thead>
+                            <tbody>
+
+
+                            {% for sentMessage in sentMessages %}
+                                <tr>
+                                    <td scope="row"><img src="{{ sentMessage.dirname }}/{{ sentMessage.filename }}.{{ sentMessage.extension }}" class="mailAvatar" width="50" height="50"></td>
+                                    <td><a href="homeUserFront&amp;userId={{ sentMessage.receiver }}">{{ sentMessage.username }}</a></td>
+                                    <td ><a title="lire le message envoyé à {{ sentMessage.username }}" href="sentMessages&amp;messageId={{ sentMessage.mp_id }}"  >{{ sentMessage.title }}</a></td>
+                                    <td>{{ sentMessage.message |truncate}}</td>
+                                    <td>{{ sentMessage.time_date_fr }}</td>
+
+
+
+
+
+                                </tr>
+
+                                <div class="modal fade" id="myModalDeleteUnreadMessage&amp;messageId={{ sentMessage.mp_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Danger suppression !</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Vous êtes sur point de supprimer le message {{ sentMessage.title }} de {{ sentMessage.username }}...continuer ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"  class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                                <a href="deleteMessage&amp;messageId={{ sentMessage.mp_id }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--fin modal delete-->
+
+
+
+
+
+
+
+
+                            {% endfor %}
+
+
+
+
+                            </tbody>
+                        </table>
+
+
+
+
+
+
+                        <!--fin messages envoyés-->
+
+
+
+
+
+
+                    </div>
+                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+
+                        <!--messages archivés-->
+                        <table id="tableArchivedMessage" class="table table-hover">
+                             <thead>
+                             <tr>
+                                 <th scope="col"></th>
+                                 <th scope="col">Expéditeur</th>
+                                 <th scope="col">Titre</th>
+                                 <th scope="col">Message</th>
+                                 <th scope="col">Date</th>
+                             </tr>
+                             </thead>
+                            <tbody>
+
+
+                            {% for archiveMessage in archiveMessages %}
+                                <tr id="trArchivedMessage">
+                                    <td scope="row"><img src="{{ archiveMessage.dirname }}/{{ archiveMessage.filename }}.{{ archiveMessage.extension }}" class="mailAvatar" width="50" height="50"></td>
+                                    <td><a href="homeUserFront&amp;userId={{ archiveMessage.id }}">{{ archiveMessage.username }}</a></td>
+                                    <td ><a title="lire le message de {{ archiveMessage.username }}" href="readArchivedMessages&amp;messageId={{ archiveMessage.mp_id }}"  >{{ archiveMessage.title }}</a></td>
+                                    <td>{{ archiveMessage.message |truncate}}</td>
+                                    <td>{{ archiveMessage.time_date_fr }}</td>
+                                    <td></td>
+                                    <td>
+                                        <div style="color: red"><i data-target="#myModalDeleteArchiveMessage&amp;messageId={{ archiveMessage.mp_id }}" data-toggle="modal" class="fas fa-times" id="crossDelete" title="effacer le message"></i></div></td>
+
+
+
+                                </tr>
+
+                                <div class="modal fade" id="myModalDeleteArchiveMessage&amp;messageId={{ archiveMessage.mp_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Danger suppression !</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Vous êtes sur point de supprimer le message {{ archiveMessage.title }} de {{ archiveMessage.username }}...continuer ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"  class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                                <a href="deleteMessage&amp;messageId={{ archiveMessage.mp_id }}"><button type="button" id="deleteButton" class="btn btn-danger">Supprimer</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--fin modal delete-->
+
+
+
+
+
+
+
+
+                            {% endfor %}
+
+
+
+
+                            </tbody>
+                        </table>
+                        <!--fin des messages archivés-->
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+
+                            <!--messages lus-->
+
+                        <table class="table table-hover">
+                             <thead>
+                             <tr>
+                                 <th scope="col"></th>
+                                 <th scope="col">Expéditeur</th>
+                                 <th scope="col">Titre</th>
+                                 <th scope="col">Message</th>
+                                 <th scope="col">Date</th>
+                             </tr>
+                             </thead>
+                            <tbody>
+
+
+                            {% for Messageread in Messagesread %}
+                                <tr>
+                                    <td scope="row"><img src="{{ Messageread.dirname }}/{{ Messageread.filename }}.{{ Messageread.extension }}" class="mailAvatar" width="50" height="50"></td>
+                                    <td><a href="homeUserFront&amp;userId={{ Messageread.expeditor }}">{{ Messageread.username }}</a></td>
+                                    <td ><a title="lire le message de {{ Messageread.username }}" href="readMessage&amp;messageId={{ Messageread.mp_id }}{#&amp;messageTitle={{ Messageread.title }}&amp;messageContent={{ Messageread.message }}&amp;dir={{ Messageread.dirname }}&amp;filename={{ Messageread.filename }}&amp;ext={{ Messageread.extension }}&amp;username={{ Messageread.username }}#}"  >{{ Messageread.title }}</a></td>
+                                    <td>{{ Messageread.message |truncate}}</td>
+                                    <td>{{ Messageread.time_date_fr }}</td>
+                                    <td><a class="linkColorArchived" href="archiveMessages&amp;messageId={{ Messageread.mp_id }}"><i title="archiver le message" class="fas fa-archive"></i></a></td>
+                                    <td>
+                                        <div style="color: red"><i data-target="#myModalDeleteReadMessage&amp;messageId={{ Messageread.mp_id }}" data-toggle="modal" class="fas fa-times" title="effacer le message"></i></div>
+
+
+
+
+
+
+                                    </td>
+
+
+
+                                </tr>
+
+                                <div class="modal fade" id="myModalDeleteReadMessage&amp;messageId={{ Messageread.mp_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Danger suppression !</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Vous êtes sur point de supprimer le message {{ Messageread.title }} de {{ Messageread.username }}...continuer ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"  class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                                <a href="deleteMessage&amp;messageId={{ Messageread.mp_id }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+
+
+
+                            </tbody>
+                        </table>
+
+                        <!--fin des messages lus-->
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock main %}
+
+
+{% block script %}
+    {{ parent() }}
+<script src="public/js/ajax.js"></script>
+    <script src="public/js/messagesAjax.js"></script>
+{% endblock script %}

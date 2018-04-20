@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/dist/css/bootstrap.min.css">
+{% endblock %}
+{% block navBarBg %}
+  bg-invert
+{% endblock %}
+{% block TEST  %}
+
+
+
+
+
+{% endblock TEST %}
+
+
+{% block title %} Error {% endblock %}
+
+{% block bodyStyle %}
+<body style="background: url('public/img/bg_{{ errorMessage.bgRamdom }}.jpg');">
+{% endblock %}
+{% block brand %}{% endblock %}
+
+
+{% block main %}
+
+    <h1>Ne vous laissez pas distraire : <br>
+        une erreur est survenue !<br>
+        <span class="alert-danger red">{{ errorMessage.errorMessage }}</span>
+
+    </h1>
+{% endblock %}

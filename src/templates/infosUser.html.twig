@@ -1,0 +1,642 @@
+{% extends "homeUser.html.twig" %}
+{% import 'form.html.twig' as form %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="public/css/infosUSer.css">
+    <link rel="stylesheet" href="carousel.css" xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="public/css/cities.css">
+    <link rel="stylesheet" href="public/css/tuto.cs">
+{% endblock stylesheet %}
+
+
+{% block  TEST %}
+    {{ dump(infos.0.getPostalCode) }}
+{% endblock TEST %}
+
+
+
+
+{% block main %}
+
+
+
+
+
+    <section><!--début ok1-->
+        <div class="container">
+            <form class="form-horizontal" role="form" method="POST" action="saveUserinfos&amp;userid={{ userDatum.id }}">
+
+
+
+
+                <h2>{{ form.col363('vos informations') }}</h2>
+
+                   <div class="row">
+
+                        <div class="half">
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Vous habitez...</span>
+                            </div>
+                            <input type="text" id="code" name="postal_code" value="{{ infos.0.getPostalCode }} " class="form-control" placeholder="Code postal" aria-label="Code postal" aria-describedby="basic-addon1">
+
+                        </div>
+
+
+                   </div>
+                        <div class="half">
+                            <input id="city" placeholder="Ville" name="city" value="{{ infos.0.city }} "   autocomplete="off">
+                        </div>
+                       <section id="output"></section>
+
+        </div>
+
+
+
+                            <div class="col-md-12 text-center">
+
+                  vous cherchez :
+
+
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="search1" name="search" class="custom-control-input" required
+ value="une femme"{% if infos.0.getSearch == "une femme" %} checked="checked"{% endif %}">
+<label class="custom-control-label" for="search1"> Une femme</label>
+                                </div>
+
+
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="search2" name="search" class="custom-control-input" required value="un homme"{% if infos.0.getSearch== "un homme" %}checked="checked"{% endif %}
+
+                                    >
+                                    <label class="custom-control-label" for="search2">Un home</label>
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+
+
+                <div class="col-md-12 text-center">
+
+                    vous cherchez :
+
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="purpose1" name="purpose" class="custom-control-input" required
+                               value="rencontre amoureuse"{% if infos.0.getPurpose == "Rencontre amoureuse" %} checked="checked"{% endif %}">
+                        <label class="custom-control-label" for="purpose1"> Rencontre amoureuse</label>
+                    </div>
+
+
+
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="purpose2" name="purpose" class="custom-control-input" required
+                               value="amitié"{% if infos.0.getPurpose == "amitié" %} checked="checked"{% endif %}">
+                        <label class="custom-control-label" for="purpose2"> Amitié</label>
+                    </div>
+
+
+
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="purpose3" name="purpose" class="custom-control-input" required
+                               value="sortie"{% if infos.0.getPurpose == "sortie" %} checked="checked"{% endif %}">
+                        <label class="custom-control-label" for="purpose3"> Sortie</label>
+                    </div>
+
+
+
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="purpose4" name="purpose" class="custom-control-input" required
+                               value="relation à préciser"{% if infos.0.getPurpose == "relation à préciser" %} checked="checked"{% endif %}">
+                        <label class="custom-control-label" for="purpose4"> Autre</label>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+                {{ form.rowVerticalSpace() }}
+
+
+
+
+
+
+
+
+
+                <fieldset class="form-control">
+
+
+                        <h3>{{ form.col12( 'Votre situation familiale') }}</h3>
+                            {{ form.col12( 'Prenez quelques instants pour vous prensentez') }}
+                            {{ form.rowVerticalSpace() }}
+
+                    <div class="row">
+
+                        <div class="col-md-12 text-center">vous êtes :
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="family_situation1" name="family_situation" class="custom-control-input" required
+                                       value="libre comme l'air"{% if infos.0.getFamilySituation == "libre comme l'air" %} checked="checked"{% endif %}">
+                                <label class="custom-control-label" for="family_situation1"> Libre comme l'air</label>
+                            </div>
+
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="family_situation2" name="family_situation" class="custom-control-input" required
+                                       value="la corde au cou"{% if infos.0.getFamilySituation == "la corde au cou" %} checked="checked"{% endif %}">
+                                <label class="custom-control-label" for="family_situation2"> la corde au cou</label>
+                            </div>
+
+
+
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="family_situation3" name="family_situation" class="custom-control-input" required
+                                       value="en couple mais heureux(se)"{% if infos.0.getFamilySituation == "en couple mais heureux(se)" %} checked="checked"{% endif %}">
+                                <label class="custom-control-label" for="family_situation3"> En couple mais heureux(se)</label>
+                            </div>
+
+
+
+
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="family_situation4" name="family_situation" class="custom-control-input" required
+                                       value="divorcé(e)"{% if infos.0.getFamilySituation == "divorcé(e)" %} checked="checked"{% endif %}">
+                                <label class="custom-control-label" for="family_situation4"> Divorcé(e)</label>
+                            </div>
+
+
+
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="family_situation5" name="family_situation" class="custom-control-input" required
+                                       value="séparé(e)"{% if infos.0.getFamilySituation == "séparé(e)" %} checked="checked"{% endif %}">
+                                <label class="custom-control-label" for="family_situation5"> Séparé(e)</label>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">Avez-vous des enfants ?
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="children1" name="children" class="custom-control-input" required
+ value="pas d'enfant"{% if infos.0.getChildren == "pas d'enfant" %} checked="checked"{% endif %}">
+<label class="custom-control-label" for="children1">Non</label>
+                                </div>
+
+
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="children2" name="children" class="custom-control-input" required
+ value="un enfant"{% if infos.0.getChildren == "un enfant" %} checked="checked"{% endif %}">
+<label class="custom-control-label" for="children2"> Oui,1</label>
+                                </div>
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="children3" name="children" class="custom-control-input" required
+ value="deux enfants"{% if infos.0.getChildren == "deux enfants" %} checked="checked"{% endif %}">
+<label class="custom-control-label" for="children3"> Oui,2</label>
+                                </div>
+
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="children4" name="children" class="custom-control-input" required
+ value="trois enfants"{% if infos.0.getChildren == "trois enfants" %} checked="checked"{% endif %}">
+<label class="custom-control-label" for="children4"> Oui,3</label>
+                                </div>
+
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="children5" name="children" class="custom-control-input" required
+ value="oui, plus de trois"{% if infos.0.getChildren == "oui, plus de trois" %} checked="checked"{% endif %}">
+<label class="custom-control-label" for="children5"> plus de trois enfants</label>
+                                </div>
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-2"></div>
+
+                        <textarea class="col-md-8 form-control" name="family_situation_add" id="family_situation_add" cols="50" rows="10" placeholder="Vous m'intriguez, pourriez-vous m'en dire plus ?">{{ infos.0.FamilySituationAdd }}</textarea>
+
+                        <div class="col-md-2}"></div>
+                    </div>
+
+
+
+
+
+
+                </fieldset>
+
+                {{form.rowVerticalSpace()}}<!--fin ok1-->
+
+                <fieldset class="form-control"><!--début ok2-->
+                    <fieldset class="form-control"><!--début ok3-->
+
+
+                     <h3>{{ form.col363('Et de vous, que diriez-vous ?') }}</h3>
+                         {{ form.col12(' ') }}
+
+
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+
+                            <textarea class="col-md-8 form-control" name="physic_add" id="physic_add" cols="50" rows="10" placeholder="Comment êtes-vous ? Décrivrez-vous...">{{ session.physic_add }}{{ infos.0.getPhysicAdd }}</textarea>
+
+                            <div class="col-md-2}"></div>
+                        </div>
+
+
+                    </fieldset>
+                {{ form.rowVerticalSpace() }}<!--fin ok2-->
+                    <fieldset class="form-control">
+
+                         <h3>{{ form.col12('Au final...') }}</h3>
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+
+                            <textarea class="col-md-8 form-control" name="speech" id="speech" cols="50" rows="10" placeholder="Que cherchez-vous ? Et à quoi vous intéressez-vous ?">{{ session.speech }}{{ infos.0.speech }}</textarea>
+
+                            <div class="col-md-2}"></div>
+                        </div>
+
+
+
+                     </fieldset>
+                     </fieldset>
+                     <div class="row"> <div class="col-md-12">&nbsp;</div> </div><!--fin ok3-->
+                      <fieldset class="form-control" id="Education">
+                             <fieldset class="form-control" id="EducationLevel">
+                                 <h2>{{ form.col12('Votre Parcours, votre vie') }}</h2>
+
+
+                                 <h4>{{ form.col363('Quel est votre niveau d\'étude ?') }}</h4>
+
+
+
+                                 <div class="row">
+                                     <div class="col-md-12">
+
+
+                                 <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level1" name="school_level" class="custom-control-input" required
+                                            value="sans diplôme"{% if infos.0.getSchoolLevel == "sans diplôme" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level1"> sans diplôme</label>
+                                 </div>
+
+
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level2" name="school_level" class="custom-control-input" required
+                                            value="BEP/CAP"{% if infos.0.getSchoolLevel == "BEP/CAP" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level2"> BEP/CAP</label>
+                                 </div>
+
+
+
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level3" name="school_level" class="custom-control-input" required
+                                            value="bac"{% if infos.0.getSchoolLevel == "bac" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level3"> bac</label>
+                                 </div>
+
+
+
+
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level4" name="school_level" class="custom-control-input" required
+                                            value="bac+1"{% if infos.0.getSchoolLevel == "bac+1" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level4"> bac+1</label>
+                                 </div>
+
+
+
+
+                                         <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level5" name="school_level" class="custom-control-input" required
+                                            value="bac+2"{% if infos.0.getSchoolLevel == "bac+2" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level5"> bac+2</label>
+                                 </div>
+
+
+
+
+                                         <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level6" name="school_level" class="custom-control-input" required
+                                            value="bac+3"{% if infos.0.getSchoolLevel == "bac+3" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level6"> bac+3</label>
+                                 </div>
+
+
+
+
+                                         <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level7" name="school_level" class="custom-control-input" required
+                                            value="bac+4"{% if infos.0.getSchoolLevel == "bac+4" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level7"> bac+4</label>
+                                 </div>
+
+
+
+
+                                         <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level8" name="school_level" class="custom-control-input" required
+                                            value="bac+5 et plus"{% if infos.0.getSchoolLevel == "bac+5 et plus" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level8"> bac+5 et plus</label>
+                                 </div>
+
+
+
+
+                                         <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="school_level9" name="school_level" class="custom-control-input" required
+                                            value="ne souhaite pas en parler"{% if infos.0.getSchoolLevel == "ne souhaite pas en parler" %} checked="checked"{% endif %}">
+                                     <label class="custom-control-label" for="school_level9"> ne souhaite pas en parler</label>
+                                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                     </div>
+                                 </div>
+
+
+
+
+
+                        {{ form.rowVerticalSpace() }}
+
+
+
+
+                                 <div class="row">
+                                     <div class="col-md-2"></div>
+
+                                     <textarea class="col-md-8 form-control" name="school_level_add" id="school_level_add" cols="50" rows="10" placeholder="Si vous avez des précision à apporter, c'est ici">{{ session.school_level_add }}{{ infos.0.getSchoolLevelAdd }}</textarea>
+
+                                     <div class="col-md-2}"></div>
+                                 </div>
+
+
+
+
+                        </fieldset>
+                         {{ form.rowVerticalSpace() }}
+                           <fieldset class="form-control" id="EducationJob">
+
+
+
+                               <h3>{{ form.col12('Quelle est votre profession ?') }}</h3>
+
+
+                               <div class="row">
+                                   <div class="col-md-12 text-center">
+
+
+                                       <div class="custom-control custom-radio custom-control-inline">
+                                           <input type="radio" id="work1" name="work" class="custom-control-input" required
+                                                  value="fonctionnaire"{% if infos.0.getWork == "fonctionnaire" %} checked="checked"{% endif %}">
+                                           <label class="custom-control-label" for="work1"> Fonctionnaire</label>
+                                       </div>
+
+
+
+
+                                       <div class="custom-control custom-radio custom-control-inline">
+                                           <input type="radio" id="work2" name="work" class="custom-control-input" required
+                                                  value="salarié"{% if infos.0.getWork == "salarié" %} checked="checked"{% endif %}">
+                                           <label class="custom-control-label" for="work2"> Salarié</label>
+                                       </div>
+
+
+
+
+
+                                       <div class="custom-control custom-radio custom-control-inline">
+                                           <input type="radio" id="work3" name="work" class="custom-control-input" required
+                                                  value="libérale"{% if infos.0.getWork == "libérale" %} checked="checked"{% endif %}">
+                                           <label class="custom-control-label" for="work3"> Profession libérale</label>
+                                       </div>
+
+
+
+
+
+                                       <div class="custom-control custom-radio custom-control-inline">
+                                           <input type="radio" id="work4" name="work" class="custom-control-input" required
+                                                  value="sans Emploi"{% if infos.0.getWork == "sans Emploi" %} checked="checked"{% endif %}">
+                                           <label class="custom-control-label" for="work4"> Sans Emploi</label>
+                                       </div>
+
+
+
+
+
+
+                                       <div class="custom-control custom-radio custom-control-inline">
+                                           <input type="radio" id="work5" name="work" class="custom-control-input" required
+                                                  value="autre"{% if infos.0.getWork == "autre" %} checked="checked"{% endif %}">
+                                           <label class="custom-control-label" for="work5"> Autre</label>
+                                       </div>
+
+
+
+
+
+
+                                   </div>
+                               </div>
+
+
+
+
+
+
+                               {{ form.rowVerticalSpace() }}
+
+
+
+                               <div class="row">
+                                   <div class="col-md-2"></div>
+
+                                   <textarea class="col-md-8 form-control" name="work_add" id="work_add" cols="50" rows="10" placeholder="Si vous avez des précision à apporter, c'est ici">{{ session.work_add }}{{ infos.0.getWorkAdd }}</textarea>
+
+                                   <div class="col-md-2}"></div>
+                               </div>
+
+
+                       </fieldset>
+                       </fieldset>
+
+
+                       <div class="row">
+                           <div class="col-md-3"></div>
+                           <div class="col-md-6 text-center">
+                               {{ form.rowVerticalSpace() }}
+                               <button type="submit" id="register" class="btn btn-success"><i class="far fa-file-alt"></i> Valider</button>&nbsp;
+                               <a href="deleteUserInfos&amp;userid={{ userDatum.id }}"><button type="button" id="eraseInfos"  class="btn btn-warning"><i class="fas fa-eraser"></i> Effacer les infos personnelles</button></a>
+
+                           </div>
+                           <div class="col-md-3"></div>
+
+                       </div>
+                {{ form.rowVerticalSpace() }}
+            </form>
+        </div>
+    </section>
+
+
+
+
+    {% block footer %}
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+
+
+                    <button type="button" id="eraseProfile" data-target="#eraseProfileModal" data-toggle="modal" class="btn btn-danger"><i class="far fa-trash-alt"></i> Effacer le profile</button>
+
+
+
+
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="eraseProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header alert alert-danger">
+                                <h5 class="modal-title align-items-center " id="exampleModalLabel">Danger  : RED button !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Vous êtes sur le point d'éradiquer votre profil ! Peut-être est-ce par erreur. dans ce cas, vite appuyer le bouton vert !</p>
+                                <p>Sinon nous espérons vous avoir aidé dans votre recherche.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Fermer</button>
+                                <button type="button"  data-toggle="modal" data-target="#destroyedProfileModal" class="btn btn-danger"><i class="fas fa-fighter-jet"></i> Détruire le profil</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="modal fade" id="destroyedProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header alert alert-danger">
+                                <h5 class="modal-title align-items-center " id="exampleModalLabel">Profil en cour de destruction ! !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>Votre profil sera détruit dès que vous aurez cliqué sur confirmation de destruction !</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Fermer</button>
+                                <a href="eraseProfil"><button type="button" class="btn btn-danger"><i class="fas fa-fire"></i> confirmation de destruction</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+        </footer>
+    {% endblock footer %}
+
+
+{% endblock main %}
+
+
+
+
+
+
+
+
+{% block script %}
+    {{ parent() }}
+    <script src="public/js/galerie2.js"></script>
+    <script src="public/js/jQuery.js"></script>
+    <script src="public/js/cities_api.js"></script>
+
+    <script src="public/js/cities.js"></script>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,59 @@
+{% extends "homeUser.html.twig" %}
+
+{% block main %}
+
+
+
+
+ <!--modale success-->
+<div class="modal fade" id="Succes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">UploadStatement</h5>
+                <button type="button" id=" dismissModalCross" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                {% for statement in message %}
+                   {{ statement }}
+                {% endfor %}
+</div>
+
+
+            <div class="modal-footer">
+                <button type="button" id="dismissModal"  class="btn btn-success" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <!--fin modale success-->
+
+
+
+
+
+
+
+
+
+    {% block script %}
+       {{ parent() }}
+
+          <script>  $('#Succes').modal('show');</script>
+
+        <script> document.getElementById('dismissModal').addEventListener('click',function () {
+                window.location.href="galerie1"
+            });
+        </script>
+
+    {% endblock script %}
+
+
+
+
+
+{% endblock main %}

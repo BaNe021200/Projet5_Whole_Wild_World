@@ -1,0 +1,11 @@
+#recrop-modal{
+   display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#validateBtn{
+
+    display: flex;
+    margin: auto ;
+}

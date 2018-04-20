@@ -1,0 +1,81 @@
+{% extends "homeUser.html.twig" %}
+
+
+
+
+{% block TEST %}
+
+
+
+
+
+
+
+
+
+{% endblock TEST %}
+
+
+
+
+
+{% block main %}
+
+
+    <!-- Modal mailViewer -->
+    <div class="modal fade" id="mailViewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">  <img src="{{ sentMessages.dirname }}/{{ sentMessages.filename }}.{{ sentMessages.extension }}" width="50" height="50" class="mailAvatar"> Message à {{ sentMessages.username }}</h4>      </h5>
+                    <button type="button" class="close" id="crossDismissModal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ sentMessages.message }}
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" id="dismissModal" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--fin modal mailViewer-->
+j
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock main %}
+
+{% block script %}
+    {{ parent() }}
+
+    <script>  $('#mailViewer').modal('show');</script>
+
+    <script> document.getElementById('dismissModal').addEventListener('click',function () {
+            window.location.href="messages"
+        });</script>
+    <script> document.getElementById('crossDismissModal').addEventListener('click',function () {
+            window.location.href="messages"
+        });</script>
+
+    <script src="public/js/jQuery.js"></script>
+
+
+
+
+
+{% endblock script %}

@@ -1,0 +1,196 @@
+{% extends "layout.html.twig" %}
+{% import 'form.html.twig' as form %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="public/css/users.css">
+    <link rel="stylesheet" href="public/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/homeUser.css">
+
+{% endblock stylesheet %}
+
+{% block title %} La page de {{ userDatum.username }}{% endblock title %}
+{% block avatar %}
+        <li class="nav-item"><img class="rounded-circle " src="{{ imageProfil }}" alt="" width="37" height="37"></li>
+
+    {% endblock avatar%}{% block bookmark %}<i class="fas fa-caret-down" style="color:#17a2b8" ></i>{% endblock bookmark %}
+{% block brand %}<span class="text-white">Whole Wild World</span>{% endblock brand %}
+
+
+{% block signUp %}La page de {{ userDatum.username }} {% endblock signUp %}
+
+{% block signUpLink %}homeUser {% endblock %}
+
+{% block navMenu %}
+    <li class="nav-item "><a class="nav-link text-white" href="galerie1">configuration de la galerie </a></li>
+    <li class="nav-item "><a class="nav-link text-white" href="galerie3">visualisation de la galerie</a></li>
+    <li class="nav-item "><a class="nav-link text-white" href="infosUser">gestion du profil </a></li>
+    <li class="nav-item "><a class="nav-link text-white" href="messages">Messagerie </a></li>
+    <li class="nav-item "><a class="nav-link text-white"  href="" data-target="#asktheWebmaster" data-toggle="modal"  >Nous contacter </a></li>
+     <div class="modal fade" id="asktheWebmaster" tabindex="-1" role="dialog" aria-labelledby="mailModalLabel"
+          aria-hidden="true">
+
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title txt text-center" id="mailModalLabel">Contactez-nous</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body">
+                     <form class="form-horizontal" method="POST" role="form"
+                           action="messageToWebmaster&amp;expeditor={{ userDatum.id }}&amp;receiver=0">
+
+
+                         <div class="form-group">
+                             <label for="title-name" class="col-form-label txt">Titre du message:</label>
+                             <input type="text" name="title" i placeholder="titre du message"
+                                    class="form-control txt" id="title">
+                         </div>
+                         <div class="form-group">
+                             <label for="message-text" class="col-form-label txt">Message:</label>
+                             <textarea class="form-control txt" name="message" id="message-text"></textarea>
+                         </div>
+
+                         <div class="modal-footer">
+
+                             <button type="submit" class="btn btn-success txt">envoyer un message
+                                 au webMaster</button>
+                         </div>
+
+                     </form>
+                 </div>
+
+
+             </div>
+         </div>
+     </div>
+
+
+{% endblock navMenu %}
+
+{% block connexion %}déconnexion{% endblock %}
+{% block connexionLink %}deconnexion{% endblock %}
+{% block profilCount %}
+    <a  href="listProfile"><button type="button" id="listProfileButton" class="btn btn-info">
+        Profils des autres utilisateurs
+
+    </button></a>
+{% endblock profilCount %}
+
+
+{% block TEST %}
+
+{% endblock TEST %}
+
+
+
+{% block main %}
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-3 ">
+                <section id="welcome">
+
+                    <h1>Hello {{ userDatum.first_name }}  </h1>
+                    <img class="rounded-circle" id="cropImage" src="{{ imageProfil }}" alt="{{"votre future photo sera ici"}}"
+                         width="150" height="150">
+
+
+                    {{ form.rowVerticalSpace() }}
+
+                  <a href="messages"><button type="button" id="listProfileButton" class="btn btn-primary" >
+                        messages non lus
+                        <span class="badge badge-light"> {{ unreadMessages.0 }}
+
+                </span>
+                        <span class="sr-only">unread messages</span>
+                    </button></a>
+
+
+                </section>
+                <section id="deezer">
+
+
+                </section>
+
+
+            </div>
+
+            <div class="col-md-6 text-left">
+
+                <section id="presentation">
+                    {{ form.rowVerticalSpace() }}
+                    <h2 class="text-center">Bienvenue sur votre page d'accueil <i class="far fa-smile"></i></h2>
+
+                    {{ "Ici vous allez pouvoir configurer tout votre profil.
+
+                dans la barre de navigation, cliquer sur la fleche en dessous de votre avatar. un menu se déroule et vous donne la possibilité de : <ul>
+                <li>configurer votre galerie</li>
+                <li>visualiser cette dernière, c'est ainsi les autres abonné la verrons</li>
+                <li>Gérer vos information informations </li>
+                </ul>" }}
+                </section>
+                <section id="gallerysettings ">
+                    <br>
+                    <h4><i class="far fa-images fa-1x"></i> Gestion de votre galerie</h4>
+
+
+                    {{ "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequuntur dignissimos error exercitationem perspiciatis quibusdam recusandae repudiandae tenetur unde ut. Asperiores eos labore laborum molestias nobis quam qui repellendus voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequuntur dignissimos error exercitationem perspiciatis quibusdam recusandae repudiandae tenetur unde ut. Asperiores eos labore laborum molestias nobis quam qui repellendus voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequuntur dignissimos error exercitationem perspiciatis quibusdam recusandae repudiandae tenetur unde ut. Asperiores eos labore laborum molestias nobis quam qui repellendus voluptatem? " }}
+
+
+                </section>
+
+                <section id="profile">
+                    <br>
+                    <h4><i class="far fa-user"></i> Gestion de votre profile</h4>
+
+                    {{ "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequuntur dignissimos error exercitationem perspiciatis quibusdam recusandae repudiandae tenetur unde ut. Asperiores eos labore laborum molestias nobis quam qui repellendus voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequuntur dignissimos error exercitationem perspiciatis quibusdam recusandae repudiandae tenetur unde ut. Asperiores eos labore laborum molestias nobis quam qui repellendus voluptatem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequuntur dignissimos error exercitationem perspiciatis quibusdam recusandae repudiandae tenetur unde ut. Asperiores eos labore laborum molestias nobis quam qui repellendus voluptatem?" }}
+
+
+                </section>
+
+
+            </div>
+
+            <div class="col-md-3"></div>
+
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+{% block footer %}
+    
+{% endblock %}
+
+
+{% block script %}
+    <script src="public/js/jQuery.js"></script>
+    {#<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>#}
+     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+     <script src="public/assets/js/vendor/popper.min.js"></script>
+     <script src="public/dist/js/bootstrap.min.js"></script>
+     <script src="public/assets/js/vendor/holder.min.js"></script>
+
+     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+     <script src="public/js/alert_homeUser.js"></script>
+
+
+{% endblock script %}

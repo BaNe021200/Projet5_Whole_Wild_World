@@ -1,0 +1,391 @@
+{% extends "layout.html.twig" %}
+{% import 'form.html.twig' as form %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="public/css/users.css">
+    <link rel="stylesheet" href="public/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/homeUser.css">
+    <link rel="stylesheet" href="public/css/homeUserFront.css">
+{% endblock stylesheet %}
+
+{% block title %} La page de {{ userDatum.username }}{% endblock title %}
+
+{% block brand %}<h2><span class="text-white">Whole Wild World</span></h2>{% endblock brand %}
+
+
+
+
+
+
+{% block avatar %}
+    <li class="nav-item"><img class="rounded-circle" src="{{ imageProfil }}" alt="" width="37" height="37"></li>
+
+{% endblock avatar%}{% block bookmark %}<i class="fas fa-caret-down" style="color:#17a2b8" ></i>{% endblock bookmark %}
+
+
+{% block signUp %}La page de {{ userDatum.username }} {% endblock signUp %}
+
+{% block signUpLink %}homeUser {% endblock %}
+
+{% block navMenu %}
+    <span class="txt">
+    <li class="nav-item "><a class="nav-link text-white" href="galerie1">configuration de la galerie </a></li>
+    <li class="nav-item "><a class="nav-link text-white"href="galerie3">visualisation de la galerie</a></li>
+    <li class="nav-item "><a class="nav-link text-white" href="infosUser">gestion du profil </a></li>
+    <li class="nav-item "><a class="nav-link text-white" href="messages">Messagerie </a></li>
+
+
+</span>
+
+{% endblock navMenu %}
+
+{% block connexion %}<span class="deconnexionButton">déconnexion</span>{% endblock %}
+{% block connexionLink %}deconnexion{% endblock %}
+{% block profilCount %}
+    <a  href="listProfile"><button type="button"  class="btn btn-info profilButton">
+            Profils des autres utilisateurs
+        </button></a>
+{% endblock %}
+
+{% block TEST %}
+
+{#<span class="presentation">{{ dump(data.userInfos.0.getCity) }}</span>#}
+
+
+
+
+
+
+{% endblock TEST %}
+
+
+
+
+
+
+{% block main %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="txt">vous êtes sur</p>
+                <h1> la page de {{ data.data.username }}</h1>
+                <img class="rounded-circle" id="cropImage"
+                     src="{{ data.data.dirname }}/{{ data.data.filename }}.{{ data.data.extension }}" alt="Generic placeholder image"
+                     width="150" height="150">
+
+                <span class="hidden">{{ form.rowVerticalSpace() }}</span>
+
+                <h4>
+                    <ul class="list-unstyled"><a
+                                href="userGalerie&amp;userId={{ data.data.id }}&amp;username={{ data.data.username }}">
+                            <li><i class="far fa-images fa-1x"></i> galerie de {{ data.data.username }}</li>
+                        </a></ul>
+                </h4>
+
+                {{ form.rowVerticalSpace() }}
+
+                <button type="button" data-toggle="modal" data-target="#mailModal"
+                        class="profilButton btn btn-success txt" data-whatever="{{ data.data.username }}">
+
+
+                    Envoyez-lui un message !
+                </button>
+
+                <div class="modal fade" id="mailModal" tabindex="-1" role="dialog" aria-labelledby="mailModalLabel"
+                     aria-hidden="true">
+                    {#<span id="alert" class="txt">{{ flash }}</span>#}
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title txt text-center" id="mailModalLabel">new message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" method="POST" role="form"
+                                      action="sendMessage&amp;expeditor={{ userDatum.id }}&amp;receiver={{ data.data.id }}">
+
+
+                                    <div class="form-group">
+                                        <label for="title-name" class="col-form-label txt">Titre du message:</label>
+                                        <input type="text" name="title" i placeholder="titre du message"
+                                               class="form-control txt" id="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label txt">Message:</label>
+                                        <textarea class="form-control txt" name="message" id="message-text"></textarea>
+                                    </div>
+
+                                    <div class="modal-footer">
+
+                                        <button type="submit" class="btn btn-success txt">envoyer un message
+                                            à {{ data.data.getUsername }}</button>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+               {# {% for info in userInfos %}#}
+                <span class="hiddenColor">{{ form.rowVerticalSpace() }}</span>
+
+                <h4>{{ form.col12("Sa présentation") }}</h4>
+                <p class="presentation text-left">{{ data.data.getUsername }}, {{ data.data.getUserAge }} ans,  est {{ data.data.getGender }} qui
+                    cherche {{ data.userInfos.0.getSearch }} pour {{ data.userInfos.0.getPurpose }}.</p>
+                <p class="presentation ">
+                    {% if data.userInfos.0.getCity == true %}
+                    {% if data.data.gender== "une femme" %}
+                        Elle
+
+                    {% else %}
+                        Il
+                    {% endif %}
+
+                        habite {{ data.userInfos.0.getCity }} ({{ data.userInfos.0.getPostalCode }})
+                        {% else %}
+                    {% endif %}
+
+
+
+
+                </p>
+
+
+                <h4>{{ form.col12("Sa situation familiale") }}</h4>
+
+                <p class="presentation text-left">  {{ data.data.getUsername }} est {{ data.userInfos.0.getFamilySituation }} et
+
+                    {% if data.data.gender== "une femme" %}
+                        elle
+
+                    {% else %}
+                        Il
+                    {% endif %}
+                    a {{ data.userInfos.0.children }} .
+
+                </p>
+                <p class="txt">
+
+                    {% if data.userInfos.0.getFamilySituationAdd == true %}
+                    {% if data.data.getGender== "une femme" %}
+                        Elle
+
+                    {% else %}
+                        Il
+                    {% endif %}
+
+                    précise :
+                <p class="presentation"><span class="hash">"</span>{{ data.userInfos.0.getFamilySituationAdd}}<span
+                            class="hash">"</span></p>
+
+            {% else %}
+
+
+                {% endif %}
+                </p>
+
+
+            </div>
+            <div class="col-md-6">
+
+
+                <h2>Son annonce</h2>
+
+                {{ form.rowVerticalSpace() }}
+
+                {% if data.userInfos.0.getPhysicAdd==true %}
+                    <p class="presentation"><span class="hash">"</span>{{ data.userInfos.0.getPhysicAdd }}<span class="hash">"</span></p>
+
+                    {% else %}
+
+                    <p class="presentation">{{ data.data.getUsername }} n'a pas encore remplie sa présentation personnelle</p>
+                {% endif %}
+
+                {% if data.userInfos.0.getSpeech==true %}
+                    <p class="presentation"><span class="hash">"</span>{{ data.userInfos.0.getSpeech }}<span class="hash">"</span></p>
+                    {% else %}
+                        <p class="presentation">{{ data.data.getUsername }} n'a pas encore remplie son annonce</p>
+                {% endif %}
+
+
+
+
+
+                <span class="txt ">{{ form.rowVerticalSpace() }}</span>
+            </div>
+            <div class="col-md-3">
+                {{ form.rowVerticalSpace() }}
+
+                <h4>{{ form.col12("Son Parcours") }}</h4>
+
+
+                <div class="presentation">
+
+                    Concernant son parcours scolaire, {{ data.data.getUsername }}
+
+                    {% if info.getSchoolLevel==true %}
+
+                        {% if data.userInfos.0.getSchoolLevel=="sans diplôme" %}
+
+                            n'a pas de diplôme.
+
+                        {% elseif  data.userInfos.0.getSchoolLevel=='ne souhaite pas en parler' %}
+
+                            ne souhaite pas en parler.
+
+                        {% else %}
+
+                            a un niveau {{ data.userInfos.0.getSchoolLevel }}.
+
+                        {% endif %}
+
+                    {% else %}
+
+                        ne l'as pas renseigné...
+                    {% endif %}
+                </div>
+                <div class="presentation">
+                    {% if data.userInfos.0.getSchoolLevelAdd == true %}
+
+                        De plus,
+                        {% if data.data.getGender== "une femme" %}
+                            elle
+
+                        {% else %}
+                            il
+                        {% endif %}
+                        précise :{{ "<br>" }} <span class="hash">"</span>{{ data.userInfos.0.getSchoolLevelAdd }}<span class="hash">"</span>
+
+                            {% else %}
+
+                        Aucune autre précision n'est apportée à ce sujet
+
+
+                    {% endif %}
+
+            </div>
+
+
+                {{ form.rowVerticalSpace() }}
+
+                <div class="presentation ">
+                    Professionnellement,
+
+
+                    {% if data.data.gender == "une femme" %}
+                        elle
+
+                    {% else %}
+                        il
+                    {% endif %}
+                    {% if  data.userInfos.0.getWork ==true %}
+                        {% if  data.userInfos.0.getWork =="Sans Emploi" %}
+                            est sans emploi
+
+                        {% elseif  data.userInfos.0.getWork =="Autre" %}
+
+                            excerce dans une catégorie socio-professionnelle à part
+
+                        {% else %}
+
+                            execerce dans la catégorie {{ data.userInfos.0.getWork }}
+
+                        {% endif %}
+
+
+
+                    {% else %}
+                        ne l'a pas renseigné
+                    {% endif %}
+
+                </div>
+
+
+                <div class="presentation">
+
+                    {% if data.userInfos.0.getWorkAdd == true %}
+                        {% if data.data.getGender == "une femme" %}
+                            Elle
+
+                        {% else %}
+                            Il
+                        {% endif %}
+                        précise :<span class="hash">"</span>{{ data.userInfos.0.getWorkAdd }}<span class="hash">"</span>
+
+                    {% else %}
+                       et n'apporte pas plus de précision.
+
+                    {% endif %}
+
+
+                </div>
+
+
+               {# {% endfor %}#}
+
+
+                </p>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock main %}
+
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="public/assets/js/vendor/popper.min.js"></script>
+    <script src="public/dist/js/bootstrap.min.js"></script>
+    <script src="public/assets/js/vendor/holder.min.js"></script>
+    <script src="public/js/upload.js"></script>
+    <script src="public/js/uploadStatement.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script>
+        $('#mailModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('Nouveau message pour ' + recipient)
+            modal.find('.modal-body ').val(recipient)
+        })
+    </script>
+    <script src="public/js/jQuery.js"></script>
+    <script>const alert = $('#alert');
+        if(alert.length > 0){
+            alert.hide().slideDown(500);
+            alert.find('.close').click(function(e){
+                e.preventDefault();
+                alert.slideUp();
+            })
+        }</script>
+
+
+
+
+
+{% endblock script %}

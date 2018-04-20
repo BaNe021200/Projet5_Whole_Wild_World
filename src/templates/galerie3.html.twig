@@ -1,0 +1,90 @@
+{% extends "homeUser.html.twig" %}
+{% import 'form.html.twig' as form %}
+{% block stylesheet %}
+
+    <link rel="stylesheet" href="public/css/galerie3.css">
+
+{% endblock %}
+
+{% block TEST %}
+
+
+{% endblock TEST %}
+
+
+
+
+{% block main %}
+    <h1>Hello {{ userDatum.first_name }}  </h1>
+
+
+
+
+
+<main role="main">
+
+  <div class="album py-5 bg-light">
+            <div class="container container-fluid">
+
+                <div class="row">
+
+                    {% for  avatar in images %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+
+
+
+                            <img id="{{ avatar.id }}" class="card-img-top img-thumbnail"  src="{{ avatar.thumbnail }}" alt="Card image cap">
+
+
+                            <div class="card-body">
+                                {#<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="btn-group">
+                                        <a href="viewerGalerie&amp;id={{ avatar.getImageId }}"> <button type="button" data-toggle="modal"  title="ouvrir photo" id="btn1" class="btn btn-xl btn-outline-secondary">View</button></a>
+
+
+                                    </div>
+
+                                    <small class="text-muted"></small>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+{% endblock main %}
+{% block script %}
+    {{ parent() }}
+    <script src="public/js/galerie1.js"></script>
+
+
+
+{% endblock %}

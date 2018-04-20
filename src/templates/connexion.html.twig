@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+{% block title %} whole wild World{% endblock %}
+
+{% import 'form.html.twig' as form %}
+
+{% block main %}
+    <section>
+        <div class="container">
+            <form class="form-horizontal" role="form" method="POST" action="getConnexion">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-center">
+                        <h2>connexion</h2>
+                        <hr>
+                    </div>
+                </div>
+
+                {{ form.input('username', 'Pseudo', 'Roquet Belles oreilles', {class: 'user' } ) }}
+                {{ form.input('password', 'Mot de passe', 'Password', {class: 'key', type: 'password' } ) }}
+
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-center">
+                        <button type="submit" id="register" class="btn btn-success"><i class="fas fa-sign-in-alt"></i> Connexion</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script src="public/js/alert_connexion.js"></script>
+{% endblock script %}

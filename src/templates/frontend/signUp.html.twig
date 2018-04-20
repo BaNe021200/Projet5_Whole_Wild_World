@@ -1,0 +1,152 @@
+{% extends 'layout.html.twig' %}
+{%  import 'form.html.twig' as form %}
+{#{% block stylesheet %}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
+
+{% endblock stylesheet %}#}
+
+
+{% block Test %}
+    {{ dump(userDatum.flash) }}
+{% endblock Test %}
+
+
+
+
+
+
+{% block main %}
+
+{% if  errors %}
+
+
+{#<div id="alert" class="alert alert-danger">
+    <p>Vous n'avez pas rempli le formulaire correctement</p>
+    <ul>
+        {% for error in errors %}
+
+
+           <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>#}
+<div id="alert" class="alert alert-danger">
+                <a class="close" id="crossClose">x</a>
+<p>Vous n'avez pas rempli le formulaire correctement</p>
+    <ul>
+        {% for error in errors %}
+
+
+           <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    <p>Cliquez sur la croix en haut à droit pour retrouver vos informatoins précedemment rentrées</p>
+            </div>
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+    <section>
+        <div class="container">
+            <form class="form-horizontal" role="form" method="POST" action="register" id="signUp">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-center">
+                        <h2>Inscription</h2>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="sexe">Je suis </label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-venus-mars"></i></div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="gender1" name="gender" class="custom-control-input"
+ value="une femme"{% if session.gender == "une femme" %} checked="checked"{% endif %}">
+<label class="custom-control-label" for="gender1"> Une femme</label>
+                                </div>
+
+
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="gender2" name="gender" class="custom-control-input"  value="un homme"{% if session.gender== "un homme" %}checked="checked"{% endif %}
+
+                                    >
+                                    <label class="custom-control-label" for="gender2">Un home</label>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-3">
+                        <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put name validation error messages here -->
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                {{ form.input('first_name', 'Prénom', 'Jane/Joe', {class: 'user', value:session.first_name   } ) }}
+                {{ form.input('last_name', 'Nom', 'Doe', {class: 'user', value:session.last_name } ) }}
+                {{ form.input('username', 'Pseudo', 'Roquet Belles oreilles', {class: 'sign-in', value:session.username } ) }}
+                {{ form.input('birthday', 'Date de naissance', '', {class: 'calendar', type: 'date',value:session.birthday } ) }}
+                {{ form.input('email', 'Votre email', 'you@example.com', {class: 'at', type: 'email',value:session.email } ) }}
+                {{ form.input('password', 'Mot de passe', 'Password', {class: 'key', type: 'password' } ) }}
+                {{ form.input('password2', 'Confirmation du Mot de passe', 'Password', {class: 'repeat', type: 'password' } ) }}
+
+
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-center">
+                        <button type="submit" id="register" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock  main%}
+
+{% block script %}
+    {{ parent() }}
+    <script src="public/js/alert_signUp.js"></script>
+    <!--<script src="public/js/app/app.js"></script>-->
+
+
+
+
+{% endblock script %}
+
+

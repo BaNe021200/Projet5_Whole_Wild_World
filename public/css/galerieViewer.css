@@ -1,0 +1,34 @@
+#modalViewerStyle
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: auto;
+    height: 700px;
+    width: auto;
+}
+
+.modal-dialog
+{
+   max-width: 1500px;
+
+
+
+}
+
+#modalSlide
+{
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: space-around;
+}
+
+#modalSlideLeft,#modalSlideRight
+{
+    margin: auto;
+}
+
+#dismissModal
+{
+    margin: auto;
+}
