@@ -125,6 +125,17 @@ class Backend
             else
             {
                 $Manager = new Manager('projet5_user');
+                $usermanager= new UserManager();
+
+                $ifUnderscore=strpos($_POST['username'],'_');
+
+                if($ifUnderscore!= false)
+                {
+                    $username=str_replace('_',' ',$_POST['username']);
+                }
+
+
+
                 $username = $Manager->readQItemUser($_POST['username'],'username');
                 if($username)
                 {
@@ -204,10 +215,10 @@ class Backend
                 @$_SESSION['email']=$_POST['email'];
                 @$_SESSION['birthday']=$_POST['birthday'];
 
-                //twigRender('frontend/signUp.html.twig','errors',$errors);
+                twigRender('frontend/signUp.html.twig','errors',$errors);
 
 
-                header('Location:signUp');
+                //header('Location:signUp');
             }
         }
     }
