@@ -1,4 +1,6 @@
 {% extends "layout.html.twig" %}
+
+
 {% import 'form.html.twig' as form %}
 
 {% block stylesheet %}
@@ -72,7 +74,7 @@
 {% block connexion %}déconnexion{% endblock %}
 {% block connexionLink %}deconnexion{% endblock %}
 {% block profilCount %}
-    <a  href="listProfile"><button type="button" id="listProfileButton" class="btn btn-info">
+    <a  href="listProfils"><button type="button" id="listProfileButton" class="btn btn-info">
         Profils des autres utilisateurs
 
     </button></a>
@@ -86,8 +88,6 @@
 
 
 {% block main %}
-
-
 
 
 
@@ -190,6 +190,7 @@
 
      <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
+     <script src="public/js/js-cookie.js"></script>
      <script src="public/js/alert_homeUser.js"></script>
 
 

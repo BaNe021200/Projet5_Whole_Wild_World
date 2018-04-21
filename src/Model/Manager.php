@@ -163,6 +163,14 @@ class Manager
 
     }
 
+    public function deleteItem($item,$col)
+    {
+        $this->pdostatement=$this->pdo->prepare('DELETE FROM ' . $this->table . ' WHERE ' .$col. '= :item ');
+        $this->pdostatement->bindValue(':item',$item, PDO::PARAM_INT);
+        //execution de la requête
+        return $this->pdostatement->execute();
+    }
+
 
 
 

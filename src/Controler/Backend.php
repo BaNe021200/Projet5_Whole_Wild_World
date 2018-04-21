@@ -7,8 +7,11 @@ namespace App\Controler;
 
 
 use App\Model\ImagesManager;
+use App\Model\InfosuserManager;
+use App\Model\MailsManager;
 use App\Model\Manager;
 use App\Model\Projet5_images;
+use App\Model\Projet5_infosuser;
 use App\Model\Session;
 use App\Model\ThumbnailsManager;
 use App\Model\UserManager;
@@ -38,15 +41,28 @@ class Backend
 
         if((strval($isConnected->getId())===$_COOKIE['ID']) && ($isConnected->getUsername()===$_COOKIE['username']))
         {
-            $manager = New \App\Model\UserManager();
+            $manager = New UserManager();
             $connectedSelf=$manager->connexionStatus($_COOKIE['ID'],1);
         }
+
+        if(!isset($_COOKIE['executed']))
+        {
+            $session=new Session();
+            $session->setFlash('Vous êtes à présent connecté','success');
+            $session->flash();
+            setcookie("executed", 'executed', time() + 3600 * 24 * 365, '', '', false, true);
+
+        }
+
+
+
         twigRender('homeUser.html.twig','imageProfil',$src);
 
     }
 
     public function connectUser()
     {
+
         twigRender('connexion.html.twig','','');
 
     }
@@ -75,12 +91,13 @@ class Backend
                 setcookie("first_name", $_SESSION['first_name'], time() + 3600 * 24 * 365, '', '', false, true);
                 setcookie("ip", $_SESSION['ip'], time() + 3600 * 24 * 365, '', '', false, true);
 
-                $session=new Session();
-                $session->setFlash('Vous êtes à présent connecté','success');
-                $session->flash();
-              twigRender('homeUser.html.twig','session',$session);
-                //header('Location:homeUser');
 
+
+
+
+
+                header('Location:homeUser');
+               // twigRender('homeUser.html.twig','','');
 
             }else{
                 throw new \Exception('Mauvais identifiant ou mot de passe');
@@ -132,15 +149,22 @@ class Backend
                 if($ifUnderscore!= false)
                 {
                     $username=str_replace('_',' ',$_POST['username']);
+                    $usernameVerif = $Manager->readQItemUser($username,'username');
+                    if($usernameVerif)
+                    {
+                        $errors['username']= 'Ce pseudo est déjà pris';
+                    }
+                }
+                else{
+                    $usernameVerif=$Manager->readQItemUser($_POST['username'],'username');
+                    if($usernameVerif)
+                    {
+                        $errors['username']= 'Ce pseudo est déjà pris';
+                    }
                 }
 
 
 
-                $username = $Manager->readQItemUser($_POST['username'],'username');
-                if($username)
-                {
-                    $errors['username']= 'Ce pseudo est déjà pris';
-                }
 
             }
 
@@ -185,10 +209,14 @@ class Backend
 
                     header('Content-Type: application/json');
                     http_response_code(200);
-                    echo json_encode(['success' => 'Bravo !']);
+                   echo json_encode(['success' => 'Vous !']);
 
-                    /*$getRegistry= new Frontend();
-                    $getRegistry->get_registry();*/
+
+
+                    $getRegistry= new Frontend();
+                    $getRegistry->get_registry();
+
+
                     die();
                 }
                 else
@@ -223,6 +251,11 @@ class Backend
         }
     }
 
+    public function registrySucces()
+    {
+        twigRender('frontend/registrySucces.html.twig','','');
+    }
+
     public function disconnectUser()
     {
         $manager= new UserManager();
@@ -232,10 +265,11 @@ class Backend
         setcookie("username","", time()- 60);
         setcookie("first_name","", time()- 60);
         setcookie("ip","", time()- 60);
+        setcookie("executed","", time()- 60);
 
-        header('Location:home');
+        //header('Location:home');
 
-        //Frontend::home();
+        twigRender('frontend/logout.html.twig','','');
     }
 
     public function emailConfirmation($userId,$token){
@@ -628,6 +662,7 @@ class Backend
 
 
     }
+
     public function viewerGalerie($imageId)
     {
 
@@ -637,6 +672,77 @@ class Backend
         twigRender('galerieViewer.html.twig','view',$view,'','');
     }
 
+    public function infosUser()
+    {
+        $infosUser = new Manager('projet5_infosuser');
+        $getinfos= $infosUser->readUsers($_COOKIE['ID'],'user_id');
 
+
+
+
+        twigRender('infosUser.html.twig','infos',$getinfos);
+
+    }
+
+    public function saveUserinfos($userId)
+    {
+        $infosUser = new Projet5_infosuser();
+        $infosUser
+            ->setUserId(intval($_COOKIE['ID']))
+            ->setSearch($_POST['search'])
+            ->setPostalCode($_POST['postal_code'])
+            ->setCity($_POST['city'])
+            ->setPurpose($_POST['purpose'])
+            ->setFamilySituation($_POST['family_situation'])
+            ->setChildren($_POST['children'])
+            ->setFamilySituationAdd($_POST['family_situation_add'])
+            ->setPhysicAdd($_POST['physic_add'])
+            ->setSpeech($_POST['speech'])
+            ->setSchoolLevel($_POST['school_level'])
+            ->setSchoolLevelAdd($_POST['school_level_add'])
+            ->setWork($_POST['work'])
+            ->setWorkAdd($_POST['work_add']);
+
+
+
+        $InfoManager= new InfosuserManager();
+        $addInfosUser= $InfoManager->create($infosUser);
+
+
+
+
+
+
+
+        header('Location: infosUser');
+    }
+
+    public function deleteUserInfos($userId)
+    {
+
+        $infos= new Projet5_infosuser();
+        $infoManager = new Manager('projet5_infosuser');
+
+        $infos=$infoManager->readUsers($userId,'user_id');
+        $infoManager->deleteItem($userId,'user_id');
+
+
+
+
+        twigRender('infosUser.html.twig','','','','');
+    }
+
+    public function messages($userId)
+    {
+
+        $mailManager = new MailsManager();
+
+       // $unSeenMessage =$mailManager->getMessages($userId,0);
+        $sentMessages=$mailManager->getSentMessages($userId);
+
+
+        twigRender('messages.html.twig','sentMessages',$sentMessages);
+
+    }
 
 }

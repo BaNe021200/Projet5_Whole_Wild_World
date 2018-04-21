@@ -7,7 +7,7 @@
 
 
 {% block Test %}
-    {{ dump(userDatum.flash) }}
+
 {% endblock Test %}
 
 
@@ -125,7 +125,29 @@
     </section>
 
 
+<div class="modal fade" id="Succes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Bienvenue</h5>
+                <button type="button" id=" dismissModalCross" class="close" data-dismiss="modal" aria-label="Close">
+                    <span idaria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
+                Bienvenue parmi nous, vous êtes maintenant inscript. un mail de confirmation vous a été envoyé afin de
+                valider votre compte.
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" id="dismissModal"  class="btn btn-success" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -142,8 +164,19 @@
 {% block script %}
     {{ parent() }}
     <script src="public/js/alert_signUp.js"></script>
-    <script src="public/js/app/app.js"></script>
+    <script src="public/js/app/signUp.js"></script>
 
+
+
+
+    <script> document.getElementById('dismissModal').addEventListener('click',function () {
+            window.location.href="home"
+        });
+    </script>
+    <script> document.getElementById('dismissModalCross').addEventListener('click',function () {
+            window.location.href="home"
+        });
+    </script>
 
 
 

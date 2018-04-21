@@ -11,8 +11,6 @@
 {% block TEST %}
 
 
-
-
 {% endblock TEST %}
 
 
@@ -32,7 +30,7 @@
         {#{{ form.rowVerticalSpace() }}#}
         <div class="row">
 
-            {% for userDatum in userdata %}
+            {% for userDatum in infos.userdata %}
 
 
 
@@ -40,7 +38,7 @@
 
 
 
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <img
                     {% if userDatum.connected==1 %}
                     class="rounded-circle connected "
@@ -88,14 +86,14 @@
             {% elseif i == currentPage + 1 %}
 
 
-                <li class="page-item  "><a href="listProfils.php?p={{ i }}" class="page-link" >{{ i }}</a> <span class="sr-only">{{ i }}</span>
+                <li class="page-item  "><a href="listProfils?p={{ i }}" class="page-link" >{{ i }}</a> <span class="sr-only">{{ i }}</span>
                 </li>
 
 
 
             {% else %}
 
-                <li class="page-item   "><a href="listProfils.php?p={{ i }}" class="page-link ">{{ i }}</a></li>
+                <li class="page-item   "><a href="listProfils?p={{ i }}" class="page-link ">{{ i }}</a></li>
 
 
             {% endif %}

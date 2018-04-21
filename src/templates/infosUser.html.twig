@@ -11,7 +11,7 @@
 
 
 {% block  TEST %}
-    {{ dump(infos.0.getPostalCode) }}
+    {{ dump(infos.0.getPurpose) }}
 {% endblock TEST %}
 
 
@@ -70,7 +70,7 @@
                                     <input type="radio" id="search2" name="search" class="custom-control-input" required value="un homme"{% if infos.0.getSearch== "un homme" %}checked="checked"{% endif %}
 
                                     >
-                                    <label class="custom-control-label" for="search2">Un home</label>
+                                    <label class="custom-control-label" for="search2">Un homme</label>
                                 </div>
 
 
@@ -84,40 +84,30 @@
 
                 <div class="col-md-12 text-center">
 
-                    vous cherchez :
+                    Pour :
 
 
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="purpose1" name="purpose" class="custom-control-input" required
-                               value="rencontre amoureuse"{% if infos.0.getPurpose == "Rencontre amoureuse" %} checked="checked"{% endif %}">
-                        <label class="custom-control-label" for="purpose1"> Rencontre amoureuse</label>
+                               value="rencontre amoureuse"{% if infos.0.getpurpose == "rencontre amoureuse" %} checked="checked"{% endif %}">
+                        <label class="custom-control-label" for="purpose1">Rencontre amoureuse</label>
                     </div>
-
-
-
 
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="purpose2" name="purpose" class="custom-control-input" required
-                               value="amitié"{% if infos.0.getPurpose == "amitié" %} checked="checked"{% endif %}">
+                               value="amitié"{% if infos.0.getpurpose == "amitié" %} checked="checked"{% endif %}">
                         <label class="custom-control-label" for="purpose2"> Amitié</label>
                     </div>
 
-
-
-
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="purpose3" name="purpose" class="custom-control-input" required
-                               value="sortie"{% if infos.0.getPurpose == "sortie" %} checked="checked"{% endif %}">
+                               value="sortie"{% if infos.0.getpurpose == "sortie" %} checked="checked"{% endif %}">
                         <label class="custom-control-label" for="purpose3"> Sortie</label>
                     </div>
-
-
-
-
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="purpose4" name="purpose" class="custom-control-input" required
-                               value="relation à préciser"{% if infos.0.getPurpose == "relation à préciser" %} checked="checked"{% endif %}">
-                        <label class="custom-control-label" for="purpose4"> Autre</label>
+                               value="rencontre à préciser"{% if infos.0.getpurpose == "rencontre à préciser" %} checked="checked"{% endif %}">
+                        <label class="custom-control-label" for="purpose4"> Rencontre à préciser</label>
                     </div>
 
 

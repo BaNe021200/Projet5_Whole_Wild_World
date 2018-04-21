@@ -48,6 +48,7 @@ $router->get('/',function (){
            $connect = new \App\Controler\Backend();
            $connect->connectUser();
 
+
         }
     });
 
@@ -67,11 +68,12 @@ $router->get('/',function (){
         {
             throw new Exception("Erreur vous n'êtes pas connectez. Veuillez vous identifier");
         }
-
-
-
-
     });
+
+
+
+
+
 
     $router->get('deconnexion',function(){
 
@@ -105,6 +107,17 @@ $router->get('/',function (){
 
 
     });
+
+    $router->get('get_registry',function (){
+
+       $register = new \App\Controler\Frontend();
+       $register->get_registry();
+
+
+
+    });
+
+
 
     $router->get('confirm',function (){
 
@@ -182,8 +195,8 @@ $router->get('/',function (){
     $router->get('infosUser',function (){
 
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
-
-            infosUser();
+            $infosUser = new \App\Controler\Backend();
+           $infosUser->infosUser();
         }
 
     });
@@ -192,7 +205,8 @@ $router->get('/',function (){
 
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
-            saveUserinfos($_GET['userid']);
+            $saveUserinfos = new \App\Controler\Backend();
+           $saveUserinfos->saveUserinfos($_GET['userid']);
         }
         else
         {
@@ -200,10 +214,15 @@ $router->get('/',function (){
         }
     })->with('userid','[0-9]+');
 
+
+
+
+
+
     $router->get('deleteUserInfos',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
-
-            deleteUserInfos($_GET['userid']);
+            $deleteUserInfos = new \App\Controler\Backend();
+           $deleteUserInfos->deleteUserInfos($_GET['userid']);
         }
         else
         {
@@ -243,7 +262,9 @@ $router->get('/',function (){
     $router->get('messages',function(){
 
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
-            messages($_COOKIE['ID']);
+
+            $messages = new \App\Controler\Backend();
+         $messages->messages($_COOKIE['ID']);
         }
         else
         {
@@ -298,7 +319,9 @@ $router->get('/',function (){
 
     $router->post('sendMessage',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
-            sendMessage($_GET['expeditor'],$_GET['receiver']);
+
+            $sendMessage= new \App\Controler\Frontend();
+                $sendMessage->sendMessage($_GET['expeditor'],$_GET['receiver']);
         }
         else
         {
@@ -306,7 +329,7 @@ $router->get('/',function (){
         }
     })->with('expeditor','[0-9]+')->with('receiver','[0-9]+');
 
-    $router->get('listProfile',function (){
+    $router->get('listProfils',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
             require_once 'lib/listProfils.php';
@@ -317,7 +340,7 @@ $router->get('/',function (){
         {
             throw new Exception("Erreur vous n'êtes pas connectez. Veuillez vous identifier");
         }
-    });
+    })->with('p','[0-9]+');
 
     $router->get('homeUserFront',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
@@ -336,7 +359,8 @@ $router->get('/',function (){
     $router->get('userGalerie',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
-            userGalerie($_GET['userId'],$_GET['username']);
+            $userGalerie = new  \App\Controler\Frontend();
+        $userGalerie->userGalerie($_GET['userId'],$_GET['username']);
 
         }
         else
@@ -348,7 +372,9 @@ $router->get('/',function (){
 
     $router->get('frontGalerieViewer',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
-            frontGalerieViewer($_GET['id'],$_GET['username']);
+
+            $frontGalerieViewer = new \App\Controler\Frontend();
+           $frontGalerieViewer->frontGalerieViewer($_GET['id'],$_GET['username']);
         }
         else
         {

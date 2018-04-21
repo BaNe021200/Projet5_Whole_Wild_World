@@ -3,6 +3,12 @@
 
 {% block TEST %}
 
+    {% for avatar in images%}
+
+
+    {% endfor %}
+
+
 
 {% endblock TEST %}
 
@@ -12,7 +18,7 @@
 
 {% block main %}
      <span class="txt"></span>
-    <h1>la galerie de {{ username.username }} &nbsp;<a href="homeUserFront&amp;userId={{ images.0.getUserId }}&amp;username={{ username.username }}"><i class="far fa-images fa-1x"></i></a></h1>
+    <h1>la galerie de {{ usernameGalerieFrontUser}} &nbsp;<a href="homeUserFront&amp;userId={{ userIdGalerieFrontUser }}&amp;username={{ usernameGalerieFrontUser }}"><i class="far fa-images fa-1x"></i></a></h1>
         
     <main role="main">
 
@@ -34,7 +40,7 @@
                                    {# <p class="card-text ">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
                                     <div class="d-flex justify-content-center align-items-center>">
                                         <div class="btn-group align-items-center> ">
-                                            <a href="frontGalerieViewer&amp;id={{ avatar.getImageId }}&amp;username={{ username.username }}"> <button type="button" data-toggle="modal"  title="ouvrir photo" id="btn1" class="btn btn-xl btn-outline-secondary  profilButton">View</button></a>
+                                            <a href="frontGalerieViewer&amp;id={{ avatar.getImageId }}&amp;username={{ usernameGalerieFrontUser }}"> <button type="button" data-toggle="modal"  title="ouvrir photo" id="btn1" class="btn btn-xl btn-outline-secondary  profilButton">View</button></a>
 
 
                                         </div>

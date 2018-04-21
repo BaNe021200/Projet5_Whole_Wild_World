@@ -1,16 +1,19 @@
 <?php
 declare(strict_types=1);
 require_once 'twig.php';
+//require_once '../twig.php';
+
+
+
 
 
 listProfile();
 
-
 function listProfile()
 {
-    $user=new App\Model\UserManager();
-    //$userProfileNbx=$user->getUserProfileNbx();
 
+    //$userProfileNbx=$user->getUserProfileNbx();
+    $user= new \App\Model\UserManager();
     $data= $user->homeDisplay();
     $nbUsers=$data->nbUsers;
 
@@ -33,8 +36,11 @@ function listProfile()
         }
     }*/
 
+    $userProfilePictures=$user->getUserProfilePicture($currentPage,$perPage);
+
     $infos=[
 
+        'userdata' =>$userProfilePictures,
         'currentPage' => $currentPage,
         'perPage'    => $perPage,
         'nbPage'    => $nbPage,
@@ -42,8 +48,7 @@ function listProfile()
     ];
 
 
-    $userProfilePictures=$user->getUserProfilePicture($currentPage,$perPage);
-    twigRender('frontend/listProfile.html.twig','userdata',$userProfilePictures,'infos',$infos);
+    twigRender('frontend/listProfile.html.twig','infos',$infos);
 
 
 

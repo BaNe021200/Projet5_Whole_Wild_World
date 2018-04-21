@@ -3,7 +3,9 @@ namespace App\Controler;
 
 
 use App\Model\InfosuserManager;
+use App\Model\MailsManager;
 use App\Model\Manager;
+use App\Model\Projet5_mails;
 use App\Model\Projet5_user;
 use App\Model\Session;
 use App\Model\UserManager;
@@ -56,9 +58,9 @@ class Frontend
 
         if($addUser)
         {
-            $session= new Session();
+            /*$session= new Session();
             $session->setFlash("Un email vous a été envoyé pour valider votre compte",'success');
-            $session->flash();
+            $session->flash();*/
 
             session_destroy();
             $userId=$user->getId();
@@ -66,7 +68,8 @@ class Frontend
             mail($newUser->getEmail(), 'Confirmation de votre compte', "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://myphptraining/Whole%20wild%20world/confirm?id=$userId&token=$token");
 
             //twigRender('frontend/home.html.twig','session',$session);
-            Frontend::home('session',$session);
+            //Frontend::home('session',$session);
+           // twigRender('frontend/registrySucces.html.twig','','');
             exit();
         }
 
@@ -94,8 +97,62 @@ class Frontend
         twigRender('frontend/homeUserFront.html.twig','data',$data);
     }
 
+    public function sendMessage($expeditor, $receiver)
+    {
+
+        $message = new Projet5_mails();
+        $message
+            ->setExpeditor(intval($_GET['expeditor']))
+            ->setReceiver(intval($_GET['receiver']))
+            ->setTitle($_POST['title'])
+            ->setMessage($_POST['message']);
+
+        $mailManager = new MailsManager();
+        $sendMessage = $mailManager->create($message);
+
+        $Session = new Session();
+        if ($sendMessage)
+        {
+
+            $Session->setFlash('votre message est envoyé','success');
+            $Session->flash();
+            // header('Location:homeUserFront&userId='.$receiver);
+
+            twigRender('homeUser.html.twig','','','','');
+        }
+        else
+        {
+            //$Session = new Session();
+            $Session->setFlash('Une erreur est survenue votre message n\'est pas envoyé','danger');
+            $Session->flash();
+            twigRender('homeUser.html.twig','','','','');
+        }
+    }
+
+    public function userGalerie($userId,$username)
+    {
+        $imageManager = new Manager('projet5_thumbnails');
+        $usermanager=new Manager('projet5_user');
+
+        //$userGalerie= $user->frontUsergalerie($userId,$username);
+        $userGalerie= $imageManager->readUsers($userId,'user_id');
+        //$username=$usermanager->readQItemUser($username,"username");
 
 
 
+
+
+        twigRender('frontend/userGalerie.html.twig','images',$userGalerie);
+    }
+
+    public function frontGalerieViewer($imageId,$username)
+    {
+
+        $imageManager=new Manager('projet5_images');
+        $view = $imageManager->readUser($imageId,'id');
+
+
+        twigRender('frontend/frontGalerieViewer.html.twig','view',$view);
+    }
 
 }

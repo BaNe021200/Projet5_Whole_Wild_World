@@ -60,12 +60,16 @@ form.addEventListener('submit', function (e) {
                     input.parentNode.appendChild(span)
                 }
             } else {
-                var results = JSON.parse(xhr.responseText)
-                alert(results.success)
+               var results =JSON.parse(xhr.responseText)
+                //alert(results.success)
+                $('#Succes').modal('show');
                 var inputs = form.querySelectorAll('input, textarea')
                 for(var i = 0; i < inputs.length; i++) {
                     inputs[i].value = ""
                 }
+
+
+
             }
             button.disabled = false
             button.textContent = buttonText
