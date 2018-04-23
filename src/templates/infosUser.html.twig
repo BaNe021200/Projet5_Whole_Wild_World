@@ -34,8 +34,21 @@
 
                    <div class="row">
 
-                        <div class="half">
-                            <div class="input-group mb-3">
+                       <section id="input" class="input-group lg-3">
+
+                           <div class="half input-group-prepend">
+                               <span class="input-group-text" id="basic-addon1">Vous habitez...</span>
+                               <input id="code" placeholder="Code postal"  name="postal_code"  autocomplete="off" autofocus="" value="{{ infos.0.getPostalCode }}">
+                           </div>
+                           <div class="half">
+                               <input id="city" placeholder="Ville" name="city" autocomplete="off" value="{{ infos.0.city }}">
+                           </div>
+                       </section>
+                       <section id="output"></section>
+
+
+                       {# <div class="half">
+                            <div class="input-group lg-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Vous habitez...</span>
                             </div>
@@ -45,10 +58,10 @@
 
 
                    </div>
-                        <div class="half">
+                        <div class="half"><div class="input-group lg-3">
                             <input id="city" placeholder="Ville" name="city" value="{{ infos.0.city }} "   autocomplete="off">
-                        </div>
-                       <section id="output"></section>
+                            </div></div>
+                       <section id="output"></section>#}
 
         </div>
 
@@ -622,9 +635,9 @@
     {{ parent() }}
     <script src="public/js/galerie2.js"></script>
 
-    <script src="public/js/cities_api.js"></script>
+    <script src="public/js/Cities_api.js"></script>
 
-    <script src="public/js/cities.js"></script>
+   <!-- <script src="public/js/cities.js"></script>-->
 
 
 

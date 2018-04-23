@@ -389,7 +389,8 @@ $router->get('/',function (){
     $router->get('archiveMessages',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
-            archiveMessages($_GET['messageId'],$_COOKIE['ID']);
+            $archiveMessages = new \App\Controler\Backend();
+           $archiveMessages->archiveMessages($_GET['messageId'],$_COOKIE['ID']);
 
         }
         else

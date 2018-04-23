@@ -892,6 +892,12 @@ class Backend
         twigRender('frontend/eraseUser.html.twig','message',$message);
     }
 
+    public function archiveMessages($messageId,$userId)
+    {
+        $mailManager = new MailsManager();
+        $update2Archived = $mailManager->updateStatus($messageId,2);
 
+        header('Location:messages');
+    }
 
 }

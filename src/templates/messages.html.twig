@@ -319,7 +319,7 @@
 
                             <!--messages lus-->
                         {% if countReadMessages.0 !=0 %}
-                            <table class="table table-hover">
+                            <table id="tableReadMessage" class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th scope="col"></th>
@@ -339,7 +339,7 @@
                                         <td ><a title="lire le message de {{ Messageread.username }}" href="readMessage&amp;messageId={{ Messageread.mp_id }}{#&amp;messageTitle={{ Messageread.title }}&amp;messageContent={{ Messageread.message }}&amp;dir={{ Messageread.dirname }}&amp;filename={{ Messageread.filename }}&amp;ext={{ Messageread.extension }}&amp;username={{ Messageread.username }}#}"  >{{ Messageread.title }}</a></td>
                                         <td>{{ Messageread.message |truncate}}</td>
                                         <td>{{ Messageread.time_date_fr }}</td>
-                                        <td><a class="linkColorArchived" href="archiveMessages&amp;messageId={{ Messageread.mp_id }}"><i title="archiver le message" class="fas fa-archive"></i></a></td>
+                                        <td id="archibeMesaegTd"><a class="linkColorArchived" id="message2archive" href="archiveMessages&amp;messageId={{ Messageread.mp_id }}"><i id="archive" title="archiver le message" class="fas fa-archive"></i></a></td>
                                         <td>
                                             <div style="color: red"><i data-target="#myModalDeleteReadMessage&amp;messageId={{ Messageread.mp_id }}" data-toggle="modal" class="fas fa-times" title="effacer le message"></i></div>
 
@@ -424,4 +424,6 @@
     {{ parent() }}
 <script src="public/js/ajax.js"></script>
     <script src="public/js/messagesAjax.js"></script>
+
+    <script src="public/js/app/archiveMessages.js"></script>
 {% endblock script %}
