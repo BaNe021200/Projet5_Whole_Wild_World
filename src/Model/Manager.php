@@ -65,7 +65,7 @@ class Manager
         //Execution de la requête
         $executeIsOk= $this->pdostatement->execute();
         if($executeIsOk){
-            $user = $this->pdostatement->fetchObject('App\Model\Projet5_user');
+            $user = $this->pdostatement->fetchObject('App\Model\\'.ucfirst($this->table).'');
             if($user===false){
                 return null;
 

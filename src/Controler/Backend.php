@@ -29,11 +29,11 @@ class Backend
 
     public static function homeUser()
     {
-        if (file_exists("users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped-center.jpg")) {
+        /*if (file_exists("users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped-center.jpg")) {
             $src = "users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped-center.jpg";
         } else {
             $src = "users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped.jpg";
-        }
+        }*/
 
 
         $Manager = new Manager('Projet5_User');
@@ -45,6 +45,16 @@ class Backend
             $connectedSelf=$manager->connexionStatus($_COOKIE['ID'],1);
         }
 
+       if(isset($_COOKIE['confirmation']))
+        {
+
+            $session= new Session();
+            $session->setFlash('Votre compte a bien été validé','success');
+            $session->flash();
+            setcookie("confirmation","", time()- 60);
+
+        }
+
         if(!isset($_COOKIE['executed']))
         {
             $session=new Session();
@@ -52,11 +62,13 @@ class Backend
             $session->flash();
             setcookie("executed", 'executed', time() + 3600 * 24 * 365, '', '', false, true);
 
+
         }
 
+        //twigRender('homeUser.html.twig','imageProfil',$src);
+        twigRender('homeUser.html.twig','','');
 
 
-        twigRender('homeUser.html.twig','imageProfil',$src);
 
     }
 
@@ -258,6 +270,15 @@ class Backend
 
     public function disconnectUser()
     {
+        $this->eraseCookies();
+
+        //header('Location:home');
+
+        twigRender('frontend/logout.html.twig','','');
+    }
+
+    public function eraseCookies()
+    {
         $manager= new UserManager();
         @$disconnectUser = $manager->connexionStatus($_COOKIE['ID'],NULL);
         session_destroy();
@@ -266,10 +287,6 @@ class Backend
         setcookie("first_name","", time()- 60);
         setcookie("ip","", time()- 60);
         setcookie("executed","", time()- 60);
-
-        //header('Location:home');
-
-        twigRender('frontend/logout.html.twig','','');
     }
 
     public function emailConfirmation($userId,$token){
@@ -331,12 +348,15 @@ class Backend
                 setcookie("username", $_SESSION['username'], time() + 3600 * 24 * 365, '', '', false, true);
                 setcookie("first_name", $_SESSION['first_name'], time() + 3600 * 24 * 365, '', '', false, true);
                 setcookie("ip", $_SESSION['ip'], time() + 3600 * 24 * 365, '', '', false, true);
+                setcookie("confirmation", 'confirmation', time() + 3600 * 24 * 365, '', '', false, true);
+        setcookie("executed", 'executed', time() + 3600 * 24 * 365, '', '', false, true);
+
 
         $session= new Session();
         $session->setFlash('Votre compte a bien été validé','success');
         $session->flash();
-                twigRender('homeUser.html.twig','session',$session);
-                //header('Location:homeUser');
+                //twigRender('homeUser.html.twig','session',$session);
+                header('Location:homeUser');
 
 
 
@@ -565,7 +585,7 @@ class Backend
         }
         else
         {
-            throw new Exception('Il n\'y a rien à recadrer');
+            throw new \Exception('Il n\'y a rien à recadrer');
         }
         $this->imageProfile();
 
@@ -744,5 +764,134 @@ class Backend
         twigRender('messages.html.twig','sentMessages',$sentMessages);
 
     }
+
+    public function readUnreadMessages($messageId,$userId)
+    {
+        $mailManager= new MailsManager();
+        $readUnseenMessage =$mailManager->readMessages($messageId,$userId,'expeditor','receiver');
+        $updateUnseenMessage = $mailManager->updateStatus($messageId,1);
+
+        twigRender('readMessage.html.twig','mailContents',$readUnseenMessage,'','');
+    }
+
+    public function sentMessages($messageId,$userId)
+    {
+        $mailManager= new MailsManager();
+        $sentMessages =$mailManager->readMessages($messageId,$userId,'receiver','expeditor');
+
+        twigRender('sentMessages.html.twig','sentMessages',$sentMessages,'','');
+    }
+
+    public function readArchivedMessages($messageId,$userId)
+    {
+        $mailManager= new MailsManager();
+        $readArchivedMessages =$mailManager->readMessages($messageId,$userId,'expeditor','receiver');
+
+        twigRender('readArchivedMessages.html.twig','archivedMessages',$readArchivedMessages,'','');
+    }
+
+    public function eraseUser($userId)
+    {
+        $folderThumbnails="users/img/user/".$_COOKIE['username'].'/thumbnails/*.jpg';
+        $dirThumbnails="users/img/user/".$_COOKIE['username'].'/thumbnails';
+
+
+        $folderProfilPicture='users/img/user/'.$_COOKIE['username'].'/profilPicture/img-userProfil.jpg';
+        $dirProfilPicture='users/img/user/'.$_COOKIE['username'].'/profilPicture';
+
+        $folderCroppedCenterToDelete = "users/img/user/".$_COOKIE['username'].'/crop/img_001-cropped-center.jpg';
+        $dirCroppedCenterToDelete = "users/img/user/".$_COOKIE['username'].'/crop';
+
+        $foldersCroppedToDelete = glob("users/img/user/".$_COOKIE['username'].'/crop/*.jpg');
+
+
+        $folderToDelete = glob("users/img/user/".$_COOKIE['username'].'/*.jpg');
+        $dirToDelete = "users/img/user/".$_COOKIE['username'];
+
+
+        $folderThumbnails= glob('users/img/user/'.$_COOKIE['username'].'/thumbnails/*.jpg');
+        if(file_exists($dirThumbnails))
+        {
+
+            foreach ($folderThumbnails as $folderThumbnail)
+            {
+                unlink($folderThumbnail);
+            }
+
+            unlink($folderProfilPicture);
+
+
+            foreach ($foldersCroppedToDelete as $folderCroppedToDelete )
+            {
+                unlink($folderCroppedToDelete);
+            }
+
+            foreach ($folderToDelete as $fileToDelete)
+            {
+                unlink($fileToDelete);
+            }
+            rmdir($dirThumbnails);
+            rmdir($dirProfilPicture);
+            rmdir($dirCroppedCenterToDelete);
+            rmdir($dirToDelete);
+        }
+
+        $intUserId = intval($userId);
+        /*$userManager= new Manager();
+        $ImageManager = new App\Model\ImagesManager();
+        $thumbnailManager = new App\Model\ThumbnailsManager();
+        $mailManager= new App\Model\MailsManager();
+        $infosuser = new App\Model\InfosuserManager();
+        //$userManager= new App\Model\UserManager();
+
+
+        $userManager->readUser($userId,'id');*/
+
+        $thumbnail= new Manager('projet5_thumbnails');
+        $thumbnail->deleteItem($userId,'user_id');
+
+
+        $images= new Manager('projet5_images');
+        $images->deleteItem($userId,'user_id');
+
+
+        $messageReceiver= new Manager('projet5_mails');
+        $messageReceiver->deleteItem($intUserId,'receiver');
+        $messageReceiver->deleteItem($intUserId,'expeditor');
+
+
+
+
+        $info = new Manager('projet5_infosUser');
+        $info->deleteItem($userId,'user_id');
+
+        $user= new Manager('projet5_user');
+        $deleteUser= $user->readUser($userId,'id');
+
+
+
+
+        mail($deleteUser->getEmail(),'Confirmation de désinscription','Au revoir,'. $_COOKIE['first_name'].', votre compte est bien détruit.' );
+       $this->eraseCookies();
+        $message= [];
+
+
+        $eraseUser=$user->deleteItem($userId,'id');
+
+
+        if($eraseUser)
+        {
+            $message[]='Votre profil est détruit...Au revoir !';
+
+        }
+        else
+        {
+            $message[]='votre profil fait de la résistance et ne peut-être détruit pour le moment';
+        }
+
+        twigRender('frontend/eraseUser.html.twig','message',$message);
+    }
+
+
 
 }

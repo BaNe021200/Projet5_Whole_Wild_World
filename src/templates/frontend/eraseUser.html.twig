@@ -39,9 +39,9 @@
 
 
     {% block script %}
-        {{ parent() }}
 
-        <script>  $('#Succes').modal('show');</script>
+        {{ parent() }}
+       <script>  $('#Succes').modal('show');</script>
 
         <script> document.getElementById('dismissModal').addEventListener('click',function () {
                 window.location.href="home"

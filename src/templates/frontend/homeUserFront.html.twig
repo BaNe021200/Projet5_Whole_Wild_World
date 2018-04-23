@@ -42,14 +42,14 @@
 {% block connexion %}<span class="deconnexionButton">déconnexion</span>{% endblock %}
 {% block connexionLink %}deconnexion{% endblock %}
 {% block profilCount %}
-    <a  href="listProfile"><button type="button"  class="btn btn-info profilButton">
+    <a  href="listProfils"><button type="button"  class="btn btn-info profilButton">
             Profils des autres utilisateurs
         </button></a>
 {% endblock %}
 
 {% block TEST %}
 
-{#<span class="presentation">{{ dump(data.userInfos.0.getCity) }}</span>#}
+
 
 
 
@@ -137,59 +137,74 @@
                 <span class="hiddenColor">{{ form.rowVerticalSpace() }}</span>
 
                 <h4>{{ form.col12("Sa présentation") }}</h4>
-                <p class="presentation text-left">{{ data.data.getUsername }}, {{ data.data.getUserAge }} ans,  est {{ data.data.getGender }} qui
+                <p class="presentation text-left">{{ data.data.getUsername }}, {{ data.data.getUserAge }} ans
+
+
+                    {% if data.userInfos.0.getSearch==true and data.userInfos.0.getPurpose %}
+                     , est {{ data.data.getGender }} qui
                     cherche {{ data.userInfos.0.getSearch }} pour {{ data.userInfos.0.getPurpose }}.</p>
                 <p class="presentation ">
                     {% if data.userInfos.0.getCity == true %}
-                    {% if data.data.gender== "une femme" %}
-                        Elle
+                        {% if data.data.gender== "une femme" %}
+                            Elle
 
-                    {% else %}
-                        Il
-                    {% endif %}
+                        {% else %}
+                            Il
+                        {% endif %}
 
                         habite {{ data.userInfos.0.getCity }} ({{ data.userInfos.0.getPostalCode }})
-                        {% else %}
+                    {% else %}
                     {% endif %}
-
-
-
-
-                </p>
-
-
-                <h4>{{ form.col12("Sa situation familiale") }}</h4>
-
-                <p class="presentation text-left">  {{ data.data.getUsername }} est {{ data.userInfos.0.getFamilySituation }} et
-
-                    {% if data.data.gender== "une femme" %}
-                        elle
 
                     {% else %}
-                        Il
+
+                      .
+
                     {% endif %}
-                    a {{ data.userInfos.0.children }} .
+
+
+
+
+
 
                 </p>
-                <p class="txt">
+
+                {% if data.userInfos.0.getFamilySituation== true and data.userInfos.0.children==true  %}
+                    <h4>{{ form.col12("Sa situation familiale") }}</h4>
+
+                    <p class="presentation text-left">  {{ data.data.getUsername }} est {{ data.userInfos.0.getFamilySituation }} et
+
+                        {% if data.data.gender== "une femme" %}
+                            elle
+
+                        {% else %}
+                            Il
+                        {% endif %}
+                        a {{ data.userInfos.0.children }} .
+
+                    </p>
+                    <p class="txt">
 
                     {% if data.userInfos.0.getFamilySituationAdd == true %}
-                    {% if data.data.getGender== "une femme" %}
-                        Elle
+                        {% if data.data.getGender== "une femme" %}
+                            Elle
+
+                        {% else %}
+                            Il
+                        {% endif %}
+
+                        précise :
+                        <p class="presentation"><span class="hash">"</span>{{ data.userInfos.0.getFamilySituationAdd}}<span
+                                    class="hash">"</span></p>
 
                     {% else %}
-                        Il
+
+
                     {% endif %}
-
-                    précise :
-                <p class="presentation"><span class="hash">"</span>{{ data.userInfos.0.getFamilySituationAdd}}<span
-                            class="hash">"</span></p>
-
-            {% else %}
-
-
+                    </p>
+                    {% else %}
                 {% endif %}
-                </p>
+
 
 
             </div>

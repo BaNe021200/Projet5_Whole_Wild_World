@@ -120,10 +120,7 @@ class Projet5_user
 
 
 
-    /**
-     * @var string $role role de l'utilisateur
-     */
-    private $role;
+
 
 
 
@@ -275,21 +272,7 @@ class Projet5_user
         return $this->registry_date;
     }
 
-    /**
-     * @return string
-     */
-    public function getRole(): string
-    {
-        return $this->role;
-    }
 
-    /**
-     * @param string $role
-     */
-    public function setRole(string $role): void
-    {
-        $this->role = $role;
-    }
 
     /**
      * @return int

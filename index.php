@@ -11,7 +11,7 @@ $router = new \App\Router\Router($_GET['url']);
 $router->get('/',function (){
     if(isset($_COOKIE['ID'])&& isset($_COOKIE['username']))
     {
-        require_once 'listProfils.php';
+        require_once 'lib/listProfils.php';
     }
     else
     {
@@ -235,8 +235,8 @@ $router->get('/',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
 
-
-            eraseUser($_COOKIE['ID']);
+            $eraseUser= new \App\Controler\Backend();
+         $eraseUser->eraseUser($_COOKIE['ID']);
 
         }
         else
@@ -275,7 +275,8 @@ $router->get('/',function (){
     $router->get('sentMessages',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
-            sentMessages($_GET['messageId'],$_COOKIE['ID']);
+            $sentMessages = new \App\Controler\Backend();
+          $sentMessages->sentMessages($_GET['messageId'],$_COOKIE['ID']);
 
         }
         else
@@ -292,7 +293,8 @@ $router->get('/',function (){
 
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
-            readArchivedMessages($_GET['messageId'],$_COOKIE['ID']);
+            $readArchivedMessages = new \App\Controler\Backend();
+        $readArchivedMessages->readArchivedMessages($_GET['messageId'],$_COOKIE['ID']);
 
         }
         else
@@ -308,7 +310,8 @@ $router->get('/',function (){
     $router->get('readMessage',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
-            readUnreadMessages($_GET['messageId'],$_COOKIE['ID']);
+            $readUnreadMessages = new \App\Controler\Backend();
+         $readUnreadMessages->readUnreadMessages($_GET['messageId'],$_COOKIE['ID']);
 
         }
         else

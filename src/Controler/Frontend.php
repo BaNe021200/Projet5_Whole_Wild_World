@@ -30,7 +30,7 @@ class Frontend
     public function get_registry()
     {
         $hashPwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $JSON= json_encode(["ROLE_USER"]);
+        //$JSON= json_encode(["ROLE_USER"]);
         $token= str_random(60);
 
         $user = new Projet5_user();
@@ -46,8 +46,8 @@ class Frontend
             ->setBirthday($_POST['birthday'])
             ->setEmail($_POST['email'])
             ->setPassword($hashPwd)
-            ->setConfirmationToken($token)
-            ->setRole($JSON);
+            ->setConfirmationToken($token);
+           // ->setRole($JSON);
 
 
         $userManager= new UserManager();

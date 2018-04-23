@@ -27,6 +27,7 @@ class UserManager extends Manager
     public function __construct()
     {
         parent::__construct('projet5_user');
+
     }
 
     /**
@@ -37,7 +38,7 @@ class UserManager extends Manager
     private function create(Projet5_user &$user){
 
 
-        $this->pdostatement=$this->pdo->prepare('INSERT INTO projet5_user VALUES (NULL,:gender,:first_name, :last_name,:username, :birthday,NULL, :email,:password,:token,NULL,NULL,NULL, NOW(),NULL,NULL,:roles)');
+        $this->pdostatement=$this->pdo->prepare('INSERT INTO projet5_user VALUES (NULL,:gender,:first_name, :last_name,:username, :birthday,NULL, :email,:password,:token,NULL,NULL,NULL, NOW(),NULL,NULL)');
         //liaison des paramètres
         $this->pdostatement->bindValue(':gender',$user->getGender(),PDO::PARAM_STR);
         $this->pdostatement->bindValue(':first_name',$user->getFirstName(),PDO::PARAM_STR);
@@ -49,7 +50,7 @@ class UserManager extends Manager
         $this->pdostatement->bindValue(':token',$user->getConfirmationToken(),PDO::PARAM_STR);
 
 
-        $this->pdostatement->bindValue(':roles', $user->getRole(), PDO::PARAM_STR);
+
         $newUser=$this->pdostatement->execute();
         $lastId=$this->pdo->lastInsertId();
 

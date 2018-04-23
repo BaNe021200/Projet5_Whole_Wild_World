@@ -30,7 +30,7 @@ function twigRender($renderPath,$argument,$params)
     $loader = new Twig_Loader_Filesystem(__DIR__ .'/src/templates');
     $twig= new Twig_Environment($loader,[
 
-        'cache'=>/*false,*/ __DIR__.'/tmp',
+        'cache'=>false, //__DIR__.'/tmp',
         'debug'=>true
 
 

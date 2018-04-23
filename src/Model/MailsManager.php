@@ -10,27 +10,13 @@ namespace App\Model;
 
 use PDO;
 
-class MailsManager
+class MailsManager extends Manager
 {
-    /**
-     * @var \PDO $pdo objet PDO lié à la base de donnée agenda
-     */
-    private $pdo;
 
-    /**
-     * @var \PDOStatement $pdostatement objet PDOStatement résultant des méthode PDO::QUERY
-    et PDO::PREPARE */
-
-    private $pdostatement;
-
-    /**
-     * Projet5_infosuserManager constructor.
-     * initialisation de la connexion à la base de donnée
-     */
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=twig','root','nzB69yCSBDz9eK46',array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+        parent::__construct('projet5_mails');
 
     }
 
