@@ -124,7 +124,7 @@ class UserManager extends Manager
      * @return array|bool tableau d'ojbet Projet5_user ou un tableau vide s'il n'y aucun d'ojet ou false si une erreur survient
      *
      */
-    public function  readAll()
+   /* public function  readAll()
     {
         $this->pdostatement= $this->pdo->query('SELECT * FROM projet5_user ORDER BY registry_date');
         //construction tableau d'objet de type Contact
@@ -136,7 +136,7 @@ class UserManager extends Manager
         return $users;
 
 
-    }
+    }*/
 
 
 

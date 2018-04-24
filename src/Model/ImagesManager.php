@@ -56,7 +56,7 @@ class ImagesManager extends Manager
      * @return bool|Contact|Null false si une erreur survient, un objet si un correspondance est trouvée,
      * Null s'il n'y aucune correspondance
      */
-    public function read($imgId){
+   /* public function read($imgId){
         $this->pdostatement= $this->pdo->prepare('SELECT * FROM projet5_images WHERE id= :id');
         //liaison paramètres
         $this->pdostatement->bindValue(':id',$imgId,PDO::PARAM_INT);
@@ -73,9 +73,9 @@ class ImagesManager extends Manager
         }else{
             return false;
         }
-    }
+    }*/
 
-    public function readUserImg( $userId)
+    /*public function readUserImg( $userId)
     {
         $this->pdostatement= $this->pdo->prepare('SELECT * FROM projet5_images WHERE user_id= :userId');
         //liaison paramètres
@@ -93,7 +93,7 @@ class ImagesManager extends Manager
         }else{
             return false;
         }
-    }
+    }*/
 
 
     /**
@@ -102,7 +102,7 @@ class ImagesManager extends Manager
      * @return array|bool tableau d'ojbet Contact ou un tableau vide s'il n'y aucun d'ojet ou false si une erreur survient
      *
      */
-    public function  readAll(){
+    /*public function  readAll(){
         $this->pdostatement= $this->pdo->query('SELECT * FROM projet5_images ');
         //construction tableau d'objet de type Contact
         $images = [];
@@ -117,7 +117,7 @@ class ImagesManager extends Manager
      * @param Projet5_images $image objet de type Contact
      * @return bool true en cas de succès et false en cas d'erreur
      */
-    private function update(Projet5_images $image){
+    /*private function update(Projet5_images $image){
         $this->pdostatement=$this->pdo->prepare('UPDATE projet5_images set dirname=:dirname, filename=:filename,extension=:extension WHERE user_id=:id LIMIT 1');
         //liaison des éléments
         $this->pdostatement->bindValue(':dirname',$image->getDirname(),PDO::PARAM_STR);
@@ -131,26 +131,26 @@ class ImagesManager extends Manager
 
 
 
-    }
+    }*/
 
     /**
      * Supprime un objet stocké en base de données
      * @param $img int identifiant de l'image
      * @return bool true en cas de succès et false en cas d'erreur
      */
-    public function delete($img){
+   /* public function delete($img){
 
         $this->pdostatement=$this->pdo->prepare('DELETE FROM projet5_images WHERE id= :id LIMIT 1');
         $this->pdostatement->bindValue(':id',$img, PDO::PARAM_INT);
         //execution de la requête
         return $this->pdostatement->execute();
-    }
+    }*/
 
-    public function deleteimageUser( $userId){
+   /* public function deleteimageUser( $userId){
         $this->pdostatement=$this->pdo->prepare('DELETE FROM projet5_images WHERE user_id=:userId');
         $this->pdostatement->bindValue(':userId',$userId,PDO::PARAM_INT);
         return $this->pdostatement->execute();
-    }
+    }*/
 
 
     public function deletePicture($picture2delete)

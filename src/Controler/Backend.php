@@ -19,7 +19,7 @@ use Twig\Cache\NullCache;
 
 require_once 'twig.php';
 require_once 'lib/functions.php';
-//require_once 'model/User.php';
+
 require_once 'lib/resize2.php';
 require_once 'lib/crop.php';
 
@@ -504,7 +504,7 @@ class Backend
                                 ->setFilename('img_00'.$img)
                                 ->setExtension('jpg');
 
-                            $uploadimage= $imageManager->create($image);
+                            @$uploadimage= @$imageManager->create($image);
 
 
 
@@ -541,7 +541,17 @@ class Backend
 
         twigRender('success.html.twig','message', $messages,'','');
 
-        @$imageId= strval($uploadimage->getId());
+
+        if(@$uploadimage)
+        {
+            @$imageId= @strval($uploadimage->getId());
+        }else{
+            throw new \Exception('Votre fichier est trop volumineux');
+        }
+
+
+
+
         @thumbNails2(525,700,$_COOKIE['ID'],$imageId);
         @resizeByHeight();
         @cropImages();
@@ -595,8 +605,8 @@ class Backend
 
 
         $src="users/img/user/".$_COOKIE['username']."/crop/img_001-cropped-center.jpg";
-        $imageManager = new ImagesManager();
-        $deleteImageCroppedCenter= $imageManager->delete($img);
+        $imageManager = new Manager('projet5_images');
+        $deleteImageCroppedCenter= $imageManager->deleteItem($img,'id');
         if(file_exists($src))
         {
 

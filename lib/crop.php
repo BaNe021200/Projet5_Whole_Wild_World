@@ -159,7 +159,7 @@ function cropcenter($image){
 function thumbNails2($width,$height,$userId,$photoId){
     //$user= new oldUserManager();
     //$images=$user->getPhoto2Thumb($userId,$photoId);
-    $imageManager = new App\Model\ImagesManager();
+    $imageManager = new \App\Model\Manager('projet5_images');
     $images = $imageManager->read($photoId);
 
     if (!file_exists('users/img/user/'.$_COOKIE['username'].'/thumbnails'))

@@ -80,7 +80,7 @@ class ThumbnailsManager extends Manager
      * @return array|bool tableau d'ojbet Projet5_user ou un tableau vide s'il n'y aucun d'ojet ou false si une erreur survient
      *
      */
-    public function  readAll()
+    /*public function  readAll()
     {
         $this->pdostatement= $this->pdo->query('SELECT * FROM projet5_thumbnails ');
         //construction tableau d'objet de type Contact
@@ -92,7 +92,7 @@ class ThumbnailsManager extends Manager
         return $thumbnails;
 
 
-    }
+    }*/
 
     public function deleteThumbnail($thumbnail2delete)
     {
@@ -103,11 +103,11 @@ class ThumbnailsManager extends Manager
         return $this->pdostatement->execute();
     }
 
-    public function delete($id){
+    /*public function delete($id){
         $this->pdostatement=$this->pdo->prepare('DELETE FROM projet5_thumbnails WHERE user_id=:id');
         $this->pdostatement->bindValue(':id',$id,PDO::PARAM_INT);//var_dump($id);
         return $this->pdostatement->execute();
-    }
+    }*/
 
 
 

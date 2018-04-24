@@ -144,7 +144,7 @@ class MailsManager extends Manager
         }
     }
 
-    public function readUserMail($who,$whoQuery)
+    /*public function readUserMail($who,$whoQuery)
     {
         $this->pdostatement=$this->pdo->prepare('
         
@@ -165,7 +165,7 @@ class MailsManager extends Manager
             return false;
         }
 
-    }
+    }*/
 
 
 
@@ -224,15 +224,15 @@ class MailsManager extends Manager
 
     }
 
-    public function delete(Projet5_mails $mail){
+    /*public function delete(Projet5_mails $mail){
 
         $this->pdostatement=$this->pdo->prepare('DELETE FROM Projet5_mails WHERE id= :id LIMIT 1');
         $this->pdostatement->bindValue(':id',$mail->getId(), PDO::PARAM_INT);
         //execution de la requête
         return $this->pdostatement->execute();
-    }
+    }*/
 
-    public function deleteUserMail($userId)
+    /*public function deleteUserMail($userId)
     {
         $this->pdostatement=$this->pdo->prepare('
             DELETE
@@ -242,7 +242,7 @@ class MailsManager extends Manager
 
             return $this->pdostatement->execute();
 
-    }
+    }*/
 
 
 }

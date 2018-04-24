@@ -11,21 +11,7 @@ use PDO;
 
 class InfosuserManager extends Manager
 {
-    /**
-    * @var \PDO $pdo objet PDO lié à la base de donnée agenda
-    */
-    //private $pdo;
 
-    /**
-     * @var \PDOStatement $pdostatement objet PDOStatement résultant des méthode PDO::QUERY
-    et PDO::PREPARE */
-
-   // private $pdostatement;
-
-    /**
-     * Projet5_infosuserManager constructor.
-     * initialisation de la connexion à la base de donnée
-     */
     public function __construct()
     {
         parent::__construct('projet5_infosuser');
@@ -67,7 +53,7 @@ class InfosuserManager extends Manager
 
     }
 
-    public function  readAll(){
+    /*public function  readAll(){
         $this->pdostatement= $this->pdo->query('SELECT * FROM Projet5_infosuser ORDER BY nom, prenom');
         //construction tableau d'objet de type Projet5_infosuser
         $Projet5_infosusers = [];
@@ -75,7 +61,7 @@ class InfosuserManager extends Manager
             $Projet5_infosusers[]= $Projet5_infosuser;
         }
         return $Projet5_infosusers;
-    }
+    }*/
 
     /**
      * récupère un objet Projet5_infosuser à partir de son identifiant
@@ -98,18 +84,7 @@ class InfosuserManager extends Manager
         return $infos;
     }
 
-     /**
-     * Supprime un objet stocké en base de données
-     * @param Projet5_mails  objet de type Mail
-     * @return bool true en cas de succès et false en cas d'erreur
-     */
-    public function delete($userId){
 
-        $this->pdostatement=$this->pdo->prepare('DELETE FROM projet5_infosuser WHERE user_id= :userId ');
-        $this->pdostatement->bindValue(':userId',$userId, PDO::PARAM_INT);
-        //execution de la requête
-        return $this->pdostatement->execute();
-    }
 
 
 
