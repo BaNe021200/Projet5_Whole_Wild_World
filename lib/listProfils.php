@@ -29,12 +29,7 @@ function listProfile()
     else{
         $currentPage='1';
     }
-    /*if(!isset ($_GET['p'])){
 
-        for($i=1; $i<=$nbPage; $i++){
-            $_GET['p']== $i;
-        }
-    }*/
 
     $userProfilePictures=$user->getUserProfilePicture($currentPage,$perPage);
 

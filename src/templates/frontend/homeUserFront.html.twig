@@ -33,6 +33,46 @@
     <li class="nav-item "><a class="nav-link text-white"href="galerie3">visualisation de la galerie</a></li>
     <li class="nav-item "><a class="nav-link text-white" href="infosUser">gestion du profil </a></li>
     <li class="nav-item "><a class="nav-link text-white" href="messages">Messagerie </a></li>
+    <li class="nav-item "><a class="nav-link text-white"  href="" data-target="#asktheWebmaster" data-toggle="modal"  >Nous contacter </a></li>
+     <div class="modal fade" id="asktheWebmaster" tabindex="-1" role="dialog" aria-labelledby="mailModalLabel"
+          aria-hidden="true">
+
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title txt text-center" id="mailModalLabel">Contactez-nous</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body">
+                     <form class="form-horizontal" method="POST" role="form"
+                           action="sendMessage&amp;expeditor={{ userDatum.id }}&amp;receiver=0">
+
+
+                         <div class="form-group">
+                             <label for="title-name" class="col-form-label txt">Titre du message:</label>
+                             <input type="text" name="title" i placeholder="titre du message"
+                                    class="form-control txt" id="title">
+                         </div>
+                         <div class="form-group">
+                             <label for="message-text" class="col-form-label txt">Message:</label>
+                             <textarea class="form-control txt" name="message" id="message-text"></textarea>
+                         </div>
+
+                         <div class="modal-footer">
+
+                             <button type="submit" class="btn btn-success txt">envoyer un message
+                                 au webMaster</button>
+                         </div>
+
+                     </form>
+                 </div>
+
+
+             </div>
+         </div>
+     </div>
 
 
 </span>

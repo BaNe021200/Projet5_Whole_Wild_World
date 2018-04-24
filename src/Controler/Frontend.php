@@ -85,9 +85,12 @@ class Frontend
     public function homeUserFront($userId)
     {
         $userManager= new UserManager();
-        $InfosManager= new InfosuserManager();
+       // $InfosManager= new InfosuserManager();
         $data= $userManager->getProfil($userId);
-        $infos=$InfosManager->read($userId);
+       // $infos=$InfosManager->read($userId);
+        $infosManager= new Manager('projet5_infosuser');
+        $infos=$infosManager->readUsers($userId,'user_id');
+
 
         $data=[
          'data'=>$data,
@@ -123,9 +126,9 @@ class Frontend
 
             $Session->setFlash('votre message est envoyé','success');
             $Session->flash();
-            // header('Location:homeUserFront&userId='.$receiver);
+            //header('Location:messages');
 
-            twigRender('homeUser.html.twig','','','','');
+            twigRender('messages.html.twig','','','','');
         }
         else
         {

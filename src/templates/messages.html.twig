@@ -420,3 +420,8 @@
 {% endblock main %}
 
 
+{% block script %}
+    {{ parent() }}
+
+<script src="public/js/alert_messages.js"></script>
+{% endblock script %}

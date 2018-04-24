@@ -70,7 +70,8 @@ class InfosuserManager extends Manager
      * @return bool|Projet5_infosuser|Null false si une erreur survient, un objet si un correspondance est trouvée,
      * Null s'il n'y aucune correspondance
      */
-    public function read($userId){
+
+    /*public function read($userId){
         $this->pdostatement= $this->pdo->prepare('SELECT * FROM Projet5_infosuser WHERE user_id= :userId');
         //liaison paramètres
         $this->pdostatement->bindValue(':userId',$userId,PDO::PARAM_INT);
@@ -82,7 +83,7 @@ class InfosuserManager extends Manager
         }
 
         return $infos;
-    }
+    }*/
 
 
 

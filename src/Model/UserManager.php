@@ -321,11 +321,11 @@ class UserManager extends Manager
     {
         $this->pdostatement=$this->pdo->query('
        SELECT COUNT(filename) AS nbUsers
-FROM projet5_images WHERE filename="img-userProfil";');
+FROM projet5_images WHERE filename="img-userProfil" AND user_id !=0;');
 
         $data= $this->pdostatement->execute();
         $data= $this->pdostatement->fetchObject();
-        return $data;
+        return $data; var_dump($data);
     }
 
 

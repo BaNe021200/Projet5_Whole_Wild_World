@@ -49,7 +49,7 @@ class Backend
         {
 
             $session= new Session();
-            $session->setFlash('Votre compte a bien été validé','success');
+            $session->setFlash('Bienvenue '.$isConnected->getFirstName(). '. Votre compte a bien été validé','success');
             $session->flash();
             setcookie("confirmation","", time()- 60);
 
@@ -352,9 +352,7 @@ class Backend
         setcookie("executed", 'executed', time() + 3600 * 24 * 365, '', '', false, true);
 
 
-        $session= new Session();
-        $session->setFlash('Votre compte a bien été validé','success');
-        $session->flash();
+
                 //twigRender('homeUser.html.twig','session',$session);
                 header('Location:homeUser');
 
@@ -769,6 +767,7 @@ class Backend
 
        // $unSeenMessage =$mailManager->getMessages($userId,0);
         $sentMessages=$mailManager->getSentMessages($userId);
+
 
 
         twigRender('messages.html.twig','sentMessages',$sentMessages);
