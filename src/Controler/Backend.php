@@ -58,7 +58,7 @@ class Backend
         if(!isset($_COOKIE['executed']))
         {
             $session=new Session();
-            $session->setFlash('Vous êtes à présent connecté','success');
+            $session->setFlash('Hello '.$isConnected->getFirstName().' ! Welcome back !  Vous êtes à présent connecté','success');
             $session->flash();
             setcookie("executed", 'executed', time() + 3600 * 24 * 365, '', '', false, true);
 
@@ -790,6 +790,16 @@ class Backend
         twigRender('readArchivedMessages.html.twig','archivedMessages',$readArchivedMessages,'','');
     }
 
+    public function deleteMessage($messageId)
+    {
+        $mailManager=new Manager('projet5_mails');
+       $mailManager->deleteItem($messageId,'id');
+
+
+        header('Location:messages');
+
+    }
+
     public function eraseUser($userId)
     {
         $folderThumbnails="users/img/user/".$_COOKIE['username'].'/thumbnails/*.jpg';
@@ -899,5 +909,7 @@ class Backend
 
         header('Location:messages');
     }
+
+
 
 }

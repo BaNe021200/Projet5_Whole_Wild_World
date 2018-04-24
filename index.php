@@ -404,7 +404,8 @@ $router->get('/',function (){
     $router->get('deleteMessage',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
 
-            deleteMessage($_GET['messageId']);
+            $deleteMessage = new \App\Controler\Backend();
+         $deleteMessage->deleteMessage($_GET['messageId']);
 
         }
         else
@@ -414,7 +415,7 @@ $router->get('/',function (){
     })->with('messageId','[0-9]+');
 
 
-    $router->post('messageToWebmaster',function (){
+    /*$router->post('messageToWebmaster',function (){
         if(isset($_COOKIE['ID'])&& isset($_COOKIE['username'])){
             sendMessageToWebmaster($_GET['expeditor'],$_GET['receiver']);
         }
@@ -422,7 +423,7 @@ $router->get('/',function (){
         {
             throw new Exception("Erreur vous n'êtes pas connectez. Veuillez vous identifier");
         }
-    })->with('expeditor','[0-9]+')->with('receiver','[0-9]+');
+    })->with('expeditor','[0-9]+')->with('receiver','[0-9]+');*/
 
 
 

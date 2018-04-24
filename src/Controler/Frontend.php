@@ -65,7 +65,9 @@ class Frontend
             session_destroy();
             $userId=$user->getId();
 
-            mail($newUser->getEmail(), 'Confirmation de votre compte', "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://myphptraining/Whole%20wild%20world/confirm?id=$userId&token=$token");
+            mail($newUser->getEmail(), 'Confirmation de votre compte', "Bonjour ".$newUser->getFirstName(). "
+            Notez votre pseudo : ".$newUser->getUsername()." <br> Votre mot de passe est celui que vous avez tapé pour vous inscrire. 
+            Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://myphptraining/Whole%20wild%20world/confirm?id=$userId&token=$token");
 
             //twigRender('frontend/home.html.twig','session',$session);
             //Frontend::home('session',$session);
@@ -109,6 +111,11 @@ class Frontend
 
         $mailManager = new MailsManager();
         $sendMessage = $mailManager->create($message);
+
+        if(intval($_GET['receiver'])===0)
+        {
+            mail('mail@site.com',"'nouveau message de'.$expeditor","$expeditor.'vous a envoyeé un mùessage'");
+        }
 
         $Session = new Session();
         if ($sendMessage)
