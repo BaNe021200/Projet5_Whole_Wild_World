@@ -9,12 +9,16 @@ function twigRender($renderPath,$argument,$params)
     $mailManager = new \App\Model\MailsManager();
 
 
-
-
-    if (file_exists("users/img/user/" . @$_COOKIE['username'] . "/crop/img_001-cropped-center.jpg")) {
-        @$src = "users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped-center.jpg";
-    } else {
-        @$src = "users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped.jpg";
+    if (file_exists('users/img/user/'.@$_COOKIE['username'].'/profilPicture/img-userProfil.jpg')&&file_exists("users/img/user/" . @$_COOKIE['username']))
+    {
+        if (file_exists("users/img/user/" . @$_COOKIE['username'] . "/crop/img_001-cropped-center.jpg")) {
+            @$src = "users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped-center.jpg";
+        } else {
+            @$src = "users/img/user/" . $_COOKIE['username'] . "/crop/img_001-cropped.jpg";
+        }
+    }else
+    {
+        $src="public/img/smiley.svg";
     }
     @$getUnSeenMessages=$mailManager->getMessages($_COOKIE['ID'],0);
     @$getSeenMessages=$mailManager->getMessages($_COOKIE['ID'],1);

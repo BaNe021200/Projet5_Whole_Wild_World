@@ -212,7 +212,7 @@ class UserManager extends Manager
             ON projet5_images.user_id=projet5_infosuser.user_id
             WHERE projet5_images.filename="img-userProfil"
             AND username != "WebMaster"
-            AND projet5_user.connected_self IS NULL
+            
             ORDER BY registry_date DESC LIMIT 0,6');
 
 

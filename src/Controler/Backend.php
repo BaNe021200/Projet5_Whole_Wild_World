@@ -285,7 +285,6 @@ class Backend
         setcookie("ID","", time()- 60);
         setcookie("username","", time()- 60);
         setcookie("first_name","", time()- 60);
-        setcookie("ip","", time()- 60);
         setcookie("executed","", time()- 60);
     }
 
@@ -342,12 +341,12 @@ class Backend
                 $_SESSION['username'] = $user->getUsername();
                 $_SESSION['first_name'] = $user->getFirstName();
                 $_SESSION['gender'] = $user->getGender();
-                $_SESSION['ip'] = $_SERVER['SERVER_ADDR'];
+
 
                 setcookie("ID", $_SESSION['id'], time() + 3600 * 24 * 365, '', '', false, true);
                 setcookie("username", $_SESSION['username'], time() + 3600 * 24 * 365, '', '', false, true);
                 setcookie("first_name", $_SESSION['first_name'], time() + 3600 * 24 * 365, '', '', false, true);
-                setcookie("ip", $_SESSION['ip'], time() + 3600 * 24 * 365, '', '', false, true);
+
                 setcookie("confirmation", 'confirmation', time() + 3600 * 24 * 365, '', '', false, true);
         setcookie("executed", 'executed', time() + 3600 * 24 * 365, '', '', false, true);
 
