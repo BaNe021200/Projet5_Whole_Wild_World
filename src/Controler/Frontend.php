@@ -117,7 +117,7 @@ class Frontend
 
         if(intval($_GET['receiver'])===0)
         {
-            mail('mail@site.com',"'nouveau message de'.$expeditor","$expeditor.'vous a envoyeé un mùessage'");
+            mail_utf8('mail@site.com',"nouveau message de ".$expeditor,"l'utilisateur N° ".$expeditor." vous a envoyé un message");
         }
 
         $Session = new Session();

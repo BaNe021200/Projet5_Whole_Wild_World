@@ -108,8 +108,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <p class="txt">vous êtes sur</p>
-                <h1> la page de {{ data.data.username }}</h1>
+                <p class="txt">vous êtes sur la page (de/du)</p>
+                <h1>  {{ data.data.username }}</h1>
                 <img class="rounded-circle" id="cropImage"
                      src="{{ data.data.dirname }}/{{ data.data.filename }}.{{ data.data.extension }}" alt="Generic placeholder image"
                      width="150" height="150">
@@ -119,7 +119,7 @@
                 <h4>
                     <ul class="list-unstyled"><a
                                 href="userGalerie&amp;userId={{ data.data.id }}&amp;username={{ data.data.username }}">
-                            <li><i class="far fa-images fa-1x"></i> galerie de {{ data.data.username }}</li>
+                            <li><i class="far fa-images fa-1x"></i> galerie de  {{ data.data.username }}</li>
                         </a></ul>
                 </h4>
 
