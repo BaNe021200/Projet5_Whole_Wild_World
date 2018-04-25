@@ -257,7 +257,7 @@ class UserManager extends Manager
 
     public function getUserProfilePicture($currentPage,$perPage)
     {
-        $this->pdostatement=$this->pdo->query('
+        $this->pdostatement=$this->pdo->prepare('
         
         SELECT projet5_images.user_id,filename, projet5_user.id,username,user_age,registry_date,connected,projet5_infosuser.city
             FROM projet5_images
@@ -267,8 +267,10 @@ class UserManager extends Manager
             ON projet5_images.user_id=projet5_infosuser.user_id
             WHERE projet5_images.filename="img-userProfil"
 
-            AND projet5_user.connected_self IS NULL AND username != "WebMaster"
+            AND projet5_user.id!= :userid AND username != "WebMaster"
             ORDER BY registry_date DESC LIMIT '.(($currentPage-1)*$perPage). ','.$perPage);
+        $this->pdostatement->bindValue(':userid',$_COOKIE['ID'],PDO::PARAM_INT);
+        $this->pdostatement->execute();
 
         $profils=[];
         while ($profil=$this->pdostatement->fetchObject()){
@@ -298,7 +300,7 @@ class UserManager extends Manager
     {
         $this->pdostatement= $this->pdo->prepare('
         UPDATE projet5_user 
-        SET connected_self = :connected
+        SET connected = :connected
         WHERE id=:id');
         $this->pdostatement->bindValue(':id',$id,PDO::PARAM_INT);
         $this->pdostatement->bindValue(':connected',$connexionstatus,PDO::PARAM_INT);
