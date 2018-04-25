@@ -65,9 +65,12 @@ class Frontend
             session_destroy();
             $userId=$user->getId();
 
-            mail($newUser->getEmail(), 'Confirmation de votre compte', "Bonjour ".$newUser->getFirstName(). "
-            Notez votre pseudo : ".$newUser->getUsername()." <br> Votre mot de passe est celui que vous avez tapé pour vous inscrire. 
-            Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://myphptraining/Whole%20wild%20world/confirm?id=$userId&token=$token");
+            mail_utf8($newUser->getEmail(), 'Confirmation de votre compte', "Bonjour ".$newUser->getFirstName(). "
+           <br> Notez votre pseudo : ".$newUser->getUsername()." <br> Votre mot de passe est celui que vous avez tapé pour vous inscrire.<br> 
+            Afin de valider votre compte merci de cliquer sur ce lien<br><br>\n\nhttp://myphptraining/Whole%20wild%20world/confirm?id=$userId&token=$token
+            <br><br>Veuillez noter que pour apparaitre sur le site vous devez impérativement orner votre profil d'une photo. Merci d'avance et à bientôt
+            
+            ");
 
             //twigRender('frontend/home.html.twig','session',$session);
             //Frontend::home('session',$session);

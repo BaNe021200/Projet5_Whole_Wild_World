@@ -466,7 +466,7 @@ class Backend
                 } else {
 
                     if($file['error']==2){$messages[]= 'votre fichier est trop volumineux';}
-                    if($file['error']==1){$messages[]= 'votre fichier excède la taille de configuration du serveur';}
+                    if($file['error']==1){$messages[]= 'votre fichier excède la taille de configuration du serveur.Veuillez Uploader un fichier < à 1.4mo ';}
 
                     //$messages[] = 'un problème est survenu lors de l\'upload';
                 }
@@ -652,7 +652,7 @@ class Backend
 
             }
             else {
-                throw new Exception('Il N\'y a rien à effacer');
+                throw new \Exception('Il N\'y a rien à effacer');
             }
         }else
         {
@@ -837,7 +837,7 @@ class Backend
                 unlink($folderThumbnail);
             }
 
-            unlink($folderProfilPicture);
+            @unlink($folderProfilPicture);
 
 
             foreach ($foldersCroppedToDelete as $folderCroppedToDelete )
@@ -890,7 +890,7 @@ class Backend
 
 
 
-        mail($deleteUser->getEmail(),'Confirmation de désinscription','Au revoir,'. $_COOKIE['first_name'].', votre compte est bien détruit.' );
+        mail_utf8($deleteUser->getEmail(),'Confirmation de désinscription','Au revoir,'. $_COOKIE['first_name'].', votre compte est bien détruit.' );
        $this->eraseCookies();
         $message= [];
 
